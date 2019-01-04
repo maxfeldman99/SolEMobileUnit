@@ -1,61 +1,90 @@
 package com.example.maxfeldman.sole_mobileunit.Main;
 
 
+
+import android.app.FragmentTransaction;
 import android.net.Uri;
+
+
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
 import com.example.maxfeldman.sole_mobileunit.R;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 
-public class MainActivity extends AppCompatActivity implements VideoFragment2.OnFragmentInteractionListener   {
+public class MainActivity extends AppCompatActivity implements VideoFragment.OnFragmentInteractionListener,PropertyChangeListener {
 
 
-    private String observerTestString = "test";
+
+    private static String serverMessage = "standby";
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //final FrameLayout layout = findViewById(R.id.video_fragment2);
-        getSupportFragmentManager().beginTransaction().replace(R.id.video_fragment2, new VideoFragment2(),"video").commit();
 
 
-        VideoFragment2 fragment = (VideoFragment2) getSupportFragmentManager().findFragmentByTag("video");
+       // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
+        final Fragment videoFragment = new VideoFragment();
+        final Fragment sessionFragment = new SessionFragment();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,videoFragment).commit();
+
+        //VideoFragment fragment = (VideoFragment) getSupportFragmentManager().findFragmentByTag("video");
         //fragment.OnVideoChanged("sad");
-
-        // getSupportFragmentManager().beginTransaction().add(R.id.video_fragment,new VideoFragment(),"video").commitNow();
-
-        //VideoFragment videoFragment = (VideoFragment) getSupportFragmentManager().findFragmentByTag("video");
-
-        //videoFragment.OnVideoChanged("sad");
+        //fragment.newInstance("happy");
 
 
 
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            startActivity(intent);
+
+
+
+//        Thread t = new Thread(new Runnable() {                // this part crashes the app when replacing fragment
+//            public void run() {
+//                try {
+//                    Thread.sleep(10000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container,sessionFragment).commit();
+//
+//                // Commit the transaction
 //
 //            }
 //        });
 //
-//        button2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+//        t.start();
+
+    }
 
 
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void propertyChange(PropertyChangeEvent evt) { // this method will lunch different fragments/methods when new data incoming to server
+        serverMessage = (String) evt.getNewValue();
+
+        switch (serverMessage) {
+            case "A":
+                // do
+                break;
+            case "B":
+                // do
+                break;
+            default:
+                break;
+        }
 
     }
 }

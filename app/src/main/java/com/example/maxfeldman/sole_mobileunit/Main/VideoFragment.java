@@ -1,12 +1,11 @@
 package com.example.maxfeldman.sole_mobileunit.Main;
 
-
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,13 @@ import android.widget.VideoView;
 
 import com.example.maxfeldman.sole_mobileunit.R;
 
-public class VideoFragment extends Fragment implements OnDataChangedListener {
 
+
+public class VideoFragment extends Fragment implements OnDataChangedListener {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     private VideoView videoView;
     private static int wrongTime = 0;
@@ -24,66 +28,130 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     private final String FINISH = " finish";
     private final String TEST = "test";
     private final String MY_URI = "android.resource://com.example.maxfeldman.sole_mobileunit/raw/";
-    private final String wrong = "wrong";
+    private final String WRONG = "wrong";
+    private final String CORRECT = "correct";
+    private final String WAITING = "waiting";
     private final int SECOND = 1000;
 
+    private static final String ARG_TEXT = "argText";
+    private String currentVideo;
 
-    public VideoFragment() {
-        // Required empty public constructor
+
+    private OnFragmentInteractionListener mListener;
+    private OnDataChangedListener listener;
+
+
+
+    public static VideoFragment newInstance(String text){
+        VideoFragment fragment = new VideoFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_TEXT,text);
+        fragment.setArguments(args);
+        return fragment;
     }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); // to lock the landscape mode
+    }
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_video_fragment, container, false);
+        videoView = (VideoView) view.findViewById(R.id.myVideoView);
+        chooseEmotion(SAD);
+//        if(getArguments() != null){
+//            currentVideo = getArguments().getString(ARG_TEXT);
+//            chooseEmotion(currentVideo);
+//        }
+
+
         // Inflate the layout for this fragment
-       View view = inflater.inflate(R.layout.fragment_video, container, false);
-       videoView = (VideoView) view.findViewById(R.id.myVideoView);
         return view;
     }
 
 
-    private void executeVideo(Uri uri,int delayTime){
 
-        videoView.setVideoURI(uri);
-        videoView.start();
-        videoView.postDelayed(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void run() {
-            }
-        }, delayTime);
-
-    }
 
     @Override
     public void OnVideoChanged(String videoType) {
-        Uri uri = null;
-        Log.d("video","onVideoChangedddddddddddddddddddddddddddd");
+        chooseEmotion(videoType);
+    }
 
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
+
+
+    private void executeVideo(Uri uri, final int delayTime){
+
+        videoView.setVideoURI(uri);
+
+//                videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() { // this section is for looping
+//                    @Override
+//                    public void onPrepared(MediaPlayer mp) {
+//                        //mp.setLooping(true);
+//
+//                    }
+//                });
+
+
+
+
+
+            videoView.start();
+            videoView.postDelayed(new Runnable() {
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void run() {
+
+                }
+            }, delayTime);
+
+
+        }
+
+
+
+
+
+    private void chooseEmotion(String videoType){
+        Uri uri = null;
+        String pathName = null;
         switch (videoType) {
 
             case HAPPY:
-                uri = Uri.parse(MY_URI + R.raw.correct);
+                pathName = MY_URI + CORRECT ;
+                uri = Uri.parse(pathName);
                 executeVideo(uri,SECOND*3);
                 break;
             case SAD:
-                String test = MY_URI + wrong;
-                Uri uri3 = Uri.parse(test);
-                executeVideo(uri3,SECOND*3);
+                pathName = MY_URI + WRONG;
+                uri = Uri.parse(pathName);
+                executeVideo(uri,SECOND*3);
                 break;
             case FINISH:
                 uri = Uri.parse(MY_URI + R.raw.youwin);
                 executeVideo(uri,SECOND*3);
                 break;
-            case TEST:
-                uri = Uri.parse(MY_URI + R.raw.test);
-                executeVideo(uri,SECOND*3);
+            case WAITING:
+                pathName = MY_URI + WAITING ;
+                uri = Uri.parse(pathName);
+                executeVideo(uri, SECOND * 7);
+
+
                 break;
 
         }
-
     }
-
-
 }
