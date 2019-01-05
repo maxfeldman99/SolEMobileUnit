@@ -1,4 +1,4 @@
-package com.example.maxfeldman.sole_mobileunit.Main;
+package com.example.maxfeldman.sole_mobileunit.Main.fragments;
 
 
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.maxfeldman.sole_mobileunit.Main;
+package com.example.maxfeldman.sole_mobileunit.Main.models;
 
 /**
  * Created by MAX FELDMAN on 04/01/2019.

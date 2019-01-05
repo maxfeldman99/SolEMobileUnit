@@ -1,6 +1,6 @@
 package com.example.maxfeldman.sole_mobileunit.Main.Server;
 
-import com.example.maxfeldman.sole_mobileunit.Main.ContentRequest;
+import com.example.maxfeldman.sole_mobileunit.Main.models.ContentRequest;
 import com.google.gson.Gson;
 
 import java.beans.PropertyChangeListener;
