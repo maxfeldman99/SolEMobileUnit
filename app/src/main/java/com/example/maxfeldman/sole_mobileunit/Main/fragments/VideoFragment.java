@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.VideoView;
 
-import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
+
 import com.example.maxfeldman.sole_mobileunit.Main.models.OnDataChangedListener;
 import com.example.maxfeldman.sole_mobileunit.R;
 

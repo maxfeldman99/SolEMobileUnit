@@ -10,10 +10,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
+import com.example.maxfeldman.sole_mobileunit.Main.Helpers.PojoConverter;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.SessionFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
 import com.example.maxfeldman.sole_mobileunit.R;
+import com.max.michael.robotviewunit.models.Request;
+import com.mongodb.BasicDBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+import org.bson.Document;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -24,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 
 
     private static String serverMessage = "standby";
+    PojoConverter pojoConverter;
 
 
 
@@ -47,24 +57,6 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 
 
 
-
-//        Thread t = new Thread(new Runnable() {                // this part crashes the app when replacing fragment
-//            public void run() {
-//                try {
-//                    Thread.sleep(10000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container,sessionFragment).commit();
-//
-//                // Commit the transaction
-//
-//            }
-//        });
-//
-//        t.start();
-
-
         /*
 
         NetworkController controller = NetworkController.INSTANCE;
@@ -74,6 +66,23 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
         Testing Network Call - Working!
 
          */
+
+
+
+
+        // mongoDB section - dont delete.
+
+//        String uri = "mongodb://solejr:solejr99@cluster0-shard-00-00-moel4.mongodb.net:27017,cluster0-shard-00-01-moel4.mongodb.net:27017,cluster0-shard-00-02-moel4.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true";
+//        MongoClientURI clientURI = new MongoClientURI(uri);
+//        MongoClient mongoClient = new MongoClient(clientURI);
+//
+//        MongoDatabase mongoDatabase = mongoClient.getDatabase("mongoDB");
+//        MongoCollection collection = mongoDatabase.getCollection("1");
+
+
+//        Request request = new Request();
+//        BasicDBObject document = pojoConverter(request);
+//        collection.insertOne(new Document(document));
 
 
 
