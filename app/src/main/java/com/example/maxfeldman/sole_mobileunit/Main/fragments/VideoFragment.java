@@ -1,4 +1,4 @@
-package com.example.maxfeldman.sole_mobileunit.Main;
+package com.example.maxfeldman.sole_mobileunit.Main.fragments;
 
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.VideoView;
 
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
+import com.example.maxfeldman.sole_mobileunit.Main.models.OnDataChangedListener;
 import com.example.maxfeldman.sole_mobileunit.R;
 
 
@@ -44,12 +46,15 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
 
 
-    public static VideoFragment newInstance(String text){
+    public static VideoFragment newInstance(String text)
+    {
         VideoFragment fragment = new VideoFragment();
+
         Bundle args = new Bundle();
         args.putString(ARG_TEXT,text);
         fragment.setArguments(args);
         return fragment;
+
     }
 
 
@@ -112,6 +117,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
                  getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,sessionFragment).commit();
              }
          });
+
 
 
 

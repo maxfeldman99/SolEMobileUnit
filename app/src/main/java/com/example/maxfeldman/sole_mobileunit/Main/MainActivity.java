@@ -2,7 +2,6 @@ package com.example.maxfeldman.sole_mobileunit.Main;
 
 
 
-import android.app.FragmentTransaction;
 import android.net.Uri;
 
 
@@ -11,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
+import com.example.maxfeldman.sole_mobileunit.Main.fragments.SessionFragment;
+import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
 import com.example.maxfeldman.sole_mobileunit.R;
 
 import java.beans.PropertyChangeEvent;
@@ -61,6 +63,19 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 //        });
 //
 //        t.start();
+
+
+        /*
+
+        NetworkController controller = NetworkController.INSTANCE;
+
+        controller.sendDataToIp("192.168.1.32","Hello, World!",null);
+
+        Testing Network Call - Working!
+
+         */
+
+
 
     }
 
