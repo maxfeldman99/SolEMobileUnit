@@ -1,6 +1,7 @@
 package com.example.maxfeldman.sole_mobileunit.Main;
 
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
     private OnFragmentInteractionListener mListener;
     private OnDataChangedListener listener;
+    final Fragment sessionFragment = new SessionFragment();
 
 
 
@@ -65,12 +67,12 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_video_fragment, container, false);
-        videoView = (VideoView) view.findViewById(R.id.myVideoView);
-        chooseEmotion(SAD);
-//        if(getArguments() != null){
-//            currentVideo = getArguments().getString(ARG_TEXT);
-//            chooseEmotion(currentVideo);
-//        }
+        videoView = view.findViewById(R.id.myVideoView);
+        chooseEmotion(WAITING);
+        if(getArguments() != null){
+            currentVideo = getArguments().getString(ARG_TEXT);
+            chooseEmotion(currentVideo);
+        }
 
 
         // Inflate the layout for this fragment
@@ -100,10 +102,16 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 //                videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() { // this section is for looping
 //                    @Override
 //                    public void onPrepared(MediaPlayer mp) {
-//                        //mp.setLooping(true);
+//                        mp.setLooping(true);
 //
 //                    }
 //                });
+         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+             @Override
+             public void onCompletion(MediaPlayer mediaPlayer) {
+                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,sessionFragment).commit();
+             }
+         });
 
 
 
