@@ -35,6 +35,9 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     private final String CORRECT = "correct";
     private final String WAITING = "waiting";
     private final int SECOND = 1000;
+    private static int counter = 0;
+    private static Uri uri = null;
+    private static boolean videoLoop = true;
 
     private static final String ARG_TEXT = "argText";
     private String currentVideo;
@@ -103,6 +106,8 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     private void executeVideo(Uri uri, final int delayTime){
 
         videoView.setVideoURI(uri);
+        final Uri temp = uri;
+
 
 //                videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() { // this section is for looping
 //                    @Override
@@ -114,7 +119,13 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
          videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
              @Override
              public void onCompletion(MediaPlayer mediaPlayer) {
-                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,sessionFragment).commit();
+                 counter++;
+                 while(videoLoop == true) {
+                     executeVideo(temp, 0);
+                 }
+
+                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, sessionFragment).commit();
+
              }
          });
 
