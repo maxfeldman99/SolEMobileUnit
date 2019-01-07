@@ -2,6 +2,7 @@ package com.example.maxfeldman.sole_mobileunit.Main.controllers;
 
 import com.example.maxfeldman.sole_mobileunit.Main.Helpers.MongoDB;
 import com.example.maxfeldman.sole_mobileunit.Main.Server.Server;
+import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
 
 /**
  * Created by MAX FELDMAN on 07/01/2019.
@@ -26,12 +27,18 @@ public class MainController {
 
     public static MainController getInstance() {
         if (instance == null) {
-            instance = new MainController(serverController,);
+            instance = new MainController(serverController,videoController,mongoDB,networkController);
         }
         return instance;
     }
 
+    public void setVideoFragment(VideoFragment fragment)
+    {
+        videoController.setVideoFragment(fragment);
+    }
+
     public void executeVideo(String content){
+
         VideoController.getInstance().setVideoContent(content);
     }
 

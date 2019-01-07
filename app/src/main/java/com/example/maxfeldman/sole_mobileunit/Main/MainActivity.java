@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 
 import com.example.maxfeldman.sole_mobileunit.Main.Helpers.PojoConverter;
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.SessionFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 
     private static String serverMessage = "standby";
     PojoConverter pojoConverter;
+    MainController mainController;
 
 
 
@@ -42,12 +44,16 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mainController = MainController.getInstance();
+
 
        // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
         final Fragment videoFragment = new VideoFragment();
         final Fragment sessionFragment = new SessionFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,videoFragment).commit();
+
+        mainController.setVideoFragment((VideoFragment) videoFragment);
 
         //VideoFragment fragment = (VideoFragment) getSupportFragmentManager().findFragmentByTag("video");
         //fragment.OnVideoChanged("sad");
