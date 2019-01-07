@@ -116,15 +116,16 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 //
 //                    }
 //                });
-         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+         {
              @Override
              public void onCompletion(MediaPlayer mediaPlayer) {
-                 counter++;
-                 while(videoLoop == true) {
-                     executeVideo(temp, 0);
-                 }
+//                 counter++;
+//                 while(videoLoop == true) {
+//                     executeVideo(temp, 0);
+//                 }
 
-                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, sessionFragment).commit();
+                     //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, sessionFragment).commit();
 
              }
          });

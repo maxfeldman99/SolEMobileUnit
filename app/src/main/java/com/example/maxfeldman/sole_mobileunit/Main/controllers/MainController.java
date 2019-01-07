@@ -16,18 +16,18 @@ public class MainController {
     private static NetworkController networkController;
 
 
-    public MainController(Server serverController, VideoController videoController, MongoDB mongoDB, NetworkController networkController) {
-        this.serverController = serverController;
-        this.videoController = videoController;
-        this.mongoDB = mongoDB;
-        this.networkController = networkController;
+    public MainController() {
+        this.serverController = new Server();
+        this.videoController = VideoController.getInstance();
+        //this.mongoDB = MongoDB.getInstance();
+        this.networkController = NetworkController.INSTANCE; // because its written in kotlin
     }
 
     private static MainController instance = null;
 
     public static MainController getInstance() {
         if (instance == null) {
-            instance = new MainController(serverController,videoController,mongoDB,networkController);
+            instance = new MainController();
         }
         return instance;
     }
@@ -40,6 +40,11 @@ public class MainController {
     public void executeVideo(String content){
 
         VideoController.getInstance().setVideoContent(content);
+    }
+
+    public void startServer(){
+        Thread thread = new Thread(serverController);
+        thread.start();
     }
 
 

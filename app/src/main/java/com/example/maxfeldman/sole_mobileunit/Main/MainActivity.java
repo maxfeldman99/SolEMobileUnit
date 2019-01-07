@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 
     private static String serverMessage = "standby";
     PojoConverter pojoConverter;
-    MainController mainController;
+    MainController mainController = MainController.getInstance();
 
 
 
@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mainController = MainController.getInstance();
+        mainController.startServer();
 
 
        // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
