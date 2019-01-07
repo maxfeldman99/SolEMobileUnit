@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainController.startServer();
+
 
 
        // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
         //fragment.OnVideoChanged("sad");
         //fragment.newInstance("happy");
 
-
+        mainController.startServer();
 
 
 

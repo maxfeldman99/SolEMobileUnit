@@ -17,7 +17,7 @@ public class MainController {
 
 
     public MainController() {
-        this.serverController = new Server();
+        this.serverController = new Server(this);
         this.videoController = VideoController.getInstance();
         //this.mongoDB = MongoDB.getInstance();
         this.networkController = NetworkController.INSTANCE; // because its written in kotlin

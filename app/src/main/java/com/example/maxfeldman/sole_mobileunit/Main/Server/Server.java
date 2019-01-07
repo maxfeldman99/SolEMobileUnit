@@ -29,27 +29,28 @@ public class Server implements Runnable {
     private ServerSocket serverSocket;
     private Socket socket;
     private String serverMessage = "standby";
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-    MainController mainController = MainController.getInstance();
+   // private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+    MainController mainController;
 
 
     private Gson gson;
     //private RobotController controller;
     // test
 
-    public Server()
+    public Server(MainController mainController)
     {
+        this.mainController = mainController;
         //controller = RobotController.getInstance();
         gson = new Gson();
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
-        support.addPropertyChangeListener(pcl);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
-        support.removePropertyChangeListener(pcl);
-    }
+//    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+//        support.addPropertyChangeListener(pcl);
+//    }
+//
+//    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+//        support.removePropertyChangeListener(pcl);
+//    }
 
 
     @Override
