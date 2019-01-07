@@ -147,9 +147,6 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
         }
 
 
-
-
-
     public void chooseEmotion(String videoType){
         Uri uri = null;
         String pathName = null;

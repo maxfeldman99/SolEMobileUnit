@@ -9,29 +9,31 @@ import com.example.maxfeldman.sole_mobileunit.Main.Server.Server;
 
 public class MainController {
 
-    private Server serverController = new Server();
-    //private VideoController videoController = new VideoController();
-    private MongoDB mongoDB = new MongoDB();
-    private NetworkController networkController;
+    private static Server serverController;
+    private static VideoController videoController;
+    private static MongoDB mongoDB;
+    private static NetworkController networkController;
 
 
-
-    public MainController() {
-
+    public MainController(Server serverController, VideoController videoController, MongoDB mongoDB, NetworkController networkController) {
+        this.serverController = serverController;
+        this.videoController = videoController;
+        this.mongoDB = mongoDB;
+        this.networkController = networkController;
     }
 
     private static MainController instance = null;
 
     public static MainController getInstance() {
         if (instance == null) {
-            instance = new MainController();
+            instance = new MainController(serverController,);
         }
         return instance;
     }
 
-
-
-
+    public void executeVideo(String content){
+        VideoController.getInstance().setVideoContent(content);
+    }
 
 
 }

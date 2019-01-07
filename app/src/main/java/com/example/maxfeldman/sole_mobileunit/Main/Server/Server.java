@@ -1,5 +1,6 @@
 package com.example.maxfeldman.sole_mobileunit.Main.Server;
 
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
 import com.example.maxfeldman.sole_mobileunit.Main.models.Answer;
 import com.example.maxfeldman.sole_mobileunit.Main.models.ContentRequest;
 import com.google.gson.Gson;
@@ -27,6 +28,7 @@ public class Server implements Runnable {
     private Socket socket;
     private String serverMessage = "standby";
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+    MainController mainController;
 
 
     private Gson gson;
