@@ -1,6 +1,7 @@
 package com.example.maxfeldman.sole_mobileunit.Main.fragments;
 
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.VideoView;
 
-import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
+
 import com.example.maxfeldman.sole_mobileunit.Main.models.OnDataChangedListener;
 import com.example.maxfeldman.sole_mobileunit.R;
 
@@ -34,6 +35,9 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     private final String CORRECT = "correct";
     private final String WAITING = "waiting";
     private final int SECOND = 1000;
+    private static int counter = 0;
+    private static Uri uri = null;
+    private static boolean videoLoop = true;
 
     private static final String ARG_TEXT = "argText";
     private String currentVideo;
@@ -41,6 +45,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
     private OnFragmentInteractionListener mListener;
     private OnDataChangedListener listener;
+    final Fragment sessionFragment = new SessionFragment();
 
 
 
@@ -70,12 +75,12 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_video_fragment, container, false);
-        videoView = (VideoView) view.findViewById(R.id.myVideoView);
-        chooseEmotion(SAD);
-//        if(getArguments() != null){
-//            currentVideo = getArguments().getString(ARG_TEXT);
-//            chooseEmotion(currentVideo);
-//        }
+        videoView = view.findViewById(R.id.myVideoView);
+        chooseEmotion(WAITING);
+        if(getArguments() != null){
+            currentVideo = getArguments().getString(ARG_TEXT);
+            chooseEmotion(currentVideo);
+        }
 
 
         // Inflate the layout for this fragment
@@ -101,14 +106,28 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     private void executeVideo(Uri uri, final int delayTime){
 
         videoView.setVideoURI(uri);
+        final Uri temp = uri;
+
 
 //                videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() { // this section is for looping
 //                    @Override
 //                    public void onPrepared(MediaPlayer mp) {
-//                        //mp.setLooping(true);
+//                        mp.setLooping(true);
 //
 //                    }
 //                });
+         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+             @Override
+             public void onCompletion(MediaPlayer mediaPlayer) {
+                 counter++;
+                 while(videoLoop == true) {
+                     executeVideo(temp, 0);
+                 }
+
+                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, sessionFragment).commit();
+
+             }
+         });
 
 
 

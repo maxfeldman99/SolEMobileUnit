@@ -1,5 +1,6 @@
 package com.example.maxfeldman.sole_mobileunit.Main.Server;
 
+import com.example.maxfeldman.sole_mobileunit.Main.models.Answer;
 import com.example.maxfeldman.sole_mobileunit.Main.models.ContentRequest;
 import com.google.gson.Gson;
 
@@ -56,11 +57,9 @@ public class Server implements Runnable {
                 //outputStream = new ObjectOutputStream(socket.getOutputStream());
                 String message = null;
                 try {
-                    //str = (String)inputStream.readObject();
                     message = (String)inputStream.readObject();
                     //ArrayList<MotorRequest> request = new ArrayList<>();
-                    ContentRequest request = gson.fromJson(message, ContentRequest.class);
-
+                    Answer answerFromUser = gson.fromJson(message, Answer.class);
                     //// observer to notify MainActivity
                     if(message!=null) {
                         support.firePropertyChange(serverMessage, "standby",message);

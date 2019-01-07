@@ -5,9 +5,41 @@
     tools:context="com.example.maxfeldman.sole_mobileunit.Main.fragments.SessionFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/rel_lay_1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        >
+
+        <Button
+            android:id="@+id/test_btn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="happy"
+
+            />
+
+        <Button
+            android:id="@+id/test_btn2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_btn1"
+            android:text="wrong" />
+
+        <Button
+            android:id="@+id/test_btn3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_btn2"
+            android:text="waiting" />
+
+
+
+
+
+
+    </LinearLayout>
+
 
 </FrameLayout>
