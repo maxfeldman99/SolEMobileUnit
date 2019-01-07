@@ -50,21 +50,30 @@ public class Server implements Runnable {
     }
 
     @Override
-    public void run() {
-        while(SERVER_IS_RUNNING) {
-            try {
+    public void run()
+    {
+
+        serverSocket= new ServerSocket(PORT);
+        socket  = serverSocket.accept();
+
+        inputStream = new ObjectInputStream(socket.getInputStream());
+        outputStream = new ObjectOutputStream(socket.getOutputStream());
+
+
+        while(SERVER_IS_RUNNING)
+        {
+            try
+            {
                 serverSocket= new ServerSocket(PORT);
                 socket  = serverSocket.accept();
                 inputStream = new ObjectInputStream(socket.getInputStream());
-                //outputStream = new ObjectOutputStream(socket.getOutputStream());
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
                 String message = null;
                 try {
                     message = (String)inputStream.readObject();
-                    //ArrayList<MotorRequest> request = new ArrayList<>();
-                    Answer answerFromUser = gson.fromJson(message, Answer.class);
-                    //// observer to notify MainActivity
                     if(message!=null) {
-                        support.firePropertyChange(serverMessage, "standby",message);
+                        //support.firePropertyChange(serverMessage, "standby",message);
+                        mainController.executeVideo(message);
                     }
                     //controller.executeSequence(request.getSequence());
 
