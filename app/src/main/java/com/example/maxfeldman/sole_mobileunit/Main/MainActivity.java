@@ -14,6 +14,7 @@ import com.example.maxfeldman.sole_mobileunit.Main.Helpers.PojoConverter;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.SessionFragment;
+import com.example.maxfeldman.sole_mobileunit.Main.fragments.TestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
 import com.example.maxfeldman.sole_mobileunit.R;
 import com.max.michael.robotviewunit.models.Request;
@@ -29,7 +30,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 
-public class MainActivity extends AppCompatActivity implements VideoFragment.OnFragmentInteractionListener,PropertyChangeListener {
+public class MainActivity extends AppCompatActivity implements VideoFragment.OnFragmentInteractionListener,PropertyChangeListener{
 
 
 
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
        // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
         final Fragment videoFragment = new VideoFragment();
         final Fragment sessionFragment = new SessionFragment();
+        final Fragment TestFragment = new SessionFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,videoFragment).commit();
 
