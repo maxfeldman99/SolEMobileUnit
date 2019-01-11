@@ -13,6 +13,7 @@ import android.os.Bundle;
 import com.example.maxfeldman.sole_mobileunit.Main.Helpers.PojoConverter;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
+import com.example.maxfeldman.sole_mobileunit.Main.fragments.ImageTestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.SessionFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.TestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
@@ -50,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
        // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
         final Fragment videoFragment = new VideoFragment();
         final Fragment sessionFragment = new SessionFragment();
-        final Fragment TestFragment = new SessionFragment();
+        final Fragment testFragment = new TestFragment();
+        final Fragment imageTestFragment = new ImageTestFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,videoFragment).commit();
 

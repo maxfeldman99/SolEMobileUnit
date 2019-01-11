@@ -15,11 +15,12 @@ public class TTS implements Runnable {
     private TextToSpeech mTTS = null;
 
 
-    public TTS(Context context){
+    public TTS(Context context,String text){
     }
 
     @Override
     public void run() {
+
 
     }
 }

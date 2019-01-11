@@ -52,8 +52,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="please enter a text"
+            android:text=""
             android:textAlignment="center"
+            android:hint="please enter a text"
             android:id="@+id/speech_edit_text"
             />
         <Button
@@ -61,7 +62,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/test_btn2"
-            android:text="waiting"
+            android:text="speak"
+            />
+        <Button
+            android:id="@+id/image_test_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test_btn2"
+            android:text="Image Test"
             />
 
 

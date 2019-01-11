@@ -46,6 +46,8 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     private OnFragmentInteractionListener mListener;
     private OnDataChangedListener listener;
     final Fragment sessionFragment = new SessionFragment();
+    final Fragment testFragment = new TestFragment();
+
 
 
 
@@ -125,7 +127,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 //                     executeVideo(temp, 0);
 //                 }
 
-                     //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, sessionFragment).commit();
+                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, testFragment).commit();
 
              }
          });

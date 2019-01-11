@@ -1,17 +1,15 @@
 package com.example.maxfeldman.sole_mobileunit.Main.fragments;
 
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.R;
@@ -25,28 +23,33 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TestFragment extends Fragment implements VideoFragment.OnFragmentInteractionListener{
+public class ImageTestFragment extends Fragment {
 
 
-    TextToSpeech mTTS;
-    private VideoFragment.OnFragmentInteractionListener mListener;
-    final Fragment imageTestFragment = new ImageTestFragment();
+    private TextToSpeech mTTS;
+    static int counter = 3;
 
 
-    public TestFragment() {
+
+
+    public ImageTestFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_image_test, container, false);
+        ImageButton button1 = view.findViewById(R.id.im_btn_1);
+        ImageButton button2 = view.findViewById(R.id.im_btn_2);
+        ImageButton button3 = view.findViewById(R.id.im_btn_3);
+        ImageButton button4 = view.findViewById(R.id.im_btn_4);
+        final TextView mistakes = view.findViewById(R.id.text_mistakes_counter);
 
-        View view = inflater.inflate(R.layout.fragment_test, container, false);
 
-
-
-
+        /// motor section
 
         final ArrayList<MotorRequest> motorRequests = new ArrayList<>();
         MotorRequest motorRequest1 = new MotorRequest("1","A","200","100","0");
@@ -70,13 +73,6 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
 
 
 
-        Button button1 = view.findViewById(R.id.test_btn1);
-        Button button2 = view.findViewById(R.id.test_btn2);
-        Button button3 = view.findViewById(R.id.test_btn3);
-        final EditText speechEditText = view.findViewById(R.id.speech_edit_text);
-        Button buttonSpeak = view.findViewById(R.id.test_btn_tts);
-        Button buttonImage = view.findViewById(R.id.image_test_btn);
-
         mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -97,42 +93,39 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               test_execute(tosend,"happy","SOL-E-JR HAPPY MODE");
+                test_execute(tosend,"happy","SOL-E-JR SAD MODE");
             }
         });
+
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                test_execute(tosend,"sad","SOL-E-JR SAD MODE");
+                counter--;
+                mistakes.setText(String.valueOf(counter));
+                checkCounterStatus(tosend);
+
+
             }
         });
+
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                test_execute(tosend,"waiting","SOL-E-JR WAITING MODE");
+                counter--;
+                mistakes.setText(String.valueOf(counter));
+                checkCounterStatus(tosend);
             }
         });
 
-
-
-        buttonSpeak.setOnClickListener(new View.OnClickListener() {
+        button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String text = null;
-                if(speechEditText.getText()!=null) {
-                     text = speechEditText.getText().toString();
-                }
-                speak(text,0.2f,0.9f);
+                counter--;
+                mistakes.setText(String.valueOf(counter));
+                checkCounterStatus(tosend);
             }
         });
 
-        buttonImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,imageTestFragment).commit();
-
-            }
-        });
 
         return view;
     }
@@ -142,17 +135,22 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
         speak(speechText,0.2f,0.9f);
         NetworkController controller = NetworkController.INSTANCE;
         controller.sendDataToIp("192.168.43.4",tosend,null);
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,videoFragment).commit();
 
     }
 
-
-
+    private void checkCounterStatus(String tosend){
+        if(counter!=0) {
+            speak("try again", 0.2f, 0.9f);
+        }else{
+            test_execute(tosend,"sad","SOL-E-JR SAD MODE");
+        }
+    }
 
     private void speak(String speechText,float pitch,float speed){
         mTTS.setSpeechRate(speed);
@@ -161,17 +159,4 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
 
     }
 
-    @Override
-    public void onDestroy() {
-        if(mTTS!=null){
-            mTTS.stop();
-            mTTS.shutdown();
-        }
-        super.onDestroy();
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }
