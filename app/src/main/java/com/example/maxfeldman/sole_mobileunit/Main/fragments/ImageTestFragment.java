@@ -27,7 +27,7 @@ public class ImageTestFragment extends Fragment {
 
 
     private TextToSpeech mTTS;
-    static int counter = 3;
+    private int counter = 3;
 
 
 
@@ -93,7 +93,7 @@ public class ImageTestFragment extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                test_execute(tosend,"happy","SOL-E-JR SAD MODE");
+                test_execute(tosend,"happy","CORRECT! YOU WIN!");
             }
         });
 
@@ -148,7 +148,8 @@ public class ImageTestFragment extends Fragment {
         if(counter!=0) {
             speak("try again", 0.2f, 0.9f);
         }else{
-            test_execute(tosend,"sad","SOL-E-JR SAD MODE");
+            counter = 3;
+            test_execute(tosend,"sad","Maybe next time");
         }
     }
 
