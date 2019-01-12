@@ -1,7 +1,7 @@
 package com.example.maxfeldman.sole_mobileunit.Main.Helpers;
 
+import com.example.maxfeldman.sole_mobileunit.Main.models.Request;
 import com.google.gson.Gson;
-import com.max.michael.robotviewunit.models.Request;
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
 

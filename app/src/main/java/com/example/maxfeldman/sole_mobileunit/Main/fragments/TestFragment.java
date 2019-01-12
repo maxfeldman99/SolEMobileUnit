@@ -14,10 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
+import com.example.maxfeldman.sole_mobileunit.Main.models.Request;
 import com.example.maxfeldman.sole_mobileunit.R;
 import com.google.gson.Gson;
-import com.max.michael.robotviewunit.models.MotorRequest;
-import com.max.michael.robotviewunit.models.Request;
+import com.example.maxfeldman.sole_mobileunit.Main.models.MotorRequest;
 
 import java.util.ArrayList;
 import java.util.Locale;
