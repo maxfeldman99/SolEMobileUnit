@@ -31,6 +31,7 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
     TextToSpeech mTTS;
     private VideoFragment.OnFragmentInteractionListener mListener;
     final Fragment imageTestFragment = new ImageTestFragment();
+    final Fragment inputTestFragment = new InputTestFragment();
 
 
     public TestFragment() {
@@ -76,6 +77,7 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
         final EditText speechEditText = view.findViewById(R.id.speech_edit_text);
         Button buttonSpeak = view.findViewById(R.id.test_btn_tts);
         Button buttonImage = view.findViewById(R.id.image_test_btn);
+        Button buttonInput = view.findViewById(R.id.input_test_btn);
 
         mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -133,6 +135,15 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
 
             }
         });
+
+        buttonInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,inputTestFragment).commit();
+            }
+        });
+
+
 
         return view;
     }
