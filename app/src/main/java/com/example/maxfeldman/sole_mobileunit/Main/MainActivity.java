@@ -19,7 +19,6 @@ import com.example.maxfeldman.sole_mobileunit.Main.fragments.SessionFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.TestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
 import com.example.maxfeldman.sole_mobileunit.R;
-import com.max.michael.robotviewunit.models.Request;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
