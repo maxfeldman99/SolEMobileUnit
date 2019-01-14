@@ -52,12 +52,17 @@ object NetworkController
 
     fun sayTTS(sentence: String, application: Application)
     {
-        GlobalScope.launch(Dispatchers.Main)
-        {
 
-            val speaker = Speakerbox(application)
-            speaker.play(sentence)
-        }
+        val javaNetworkController = JavaNetworkController.getInstance()
+
+        javaNetworkController.sayTTS(sentence,application);
+
+//        GlobalScope.launch(Dispatchers.Main)
+//        {
+//
+//            val speaker = Speakerbox(application)
+//            speaker.play(sentence)
+//        }
 
 
 

@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.R;
 
@@ -34,7 +35,6 @@ public class InputTestFragment extends Fragment {
     private String taskText = "spell correct the content of the image";
 
     NetworkController networkController = NetworkController.INSTANCE;
-
 
     public InputTestFragment() {
         // Required empty public constructor
