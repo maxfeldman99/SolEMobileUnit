@@ -38,6 +38,8 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
     NetworkController networkController = NetworkController.INSTANCE;
 
 
+
+
     public TestFragment() {
         // Required empty public constructor
     }
@@ -115,7 +117,7 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                networkController.sayTTS("bla bla bla bla bla bla bla bla",getContext());
+                networkController.sayTTS("bla bla bla bla bla bla bla bla",getActivity().getApplication());
                 //test_execute(tosend,"waiting","SOL-E-JR WAITING MODE");
             }
         });

@@ -1,5 +1,9 @@
 package com.example.maxfeldman.sole_mobileunit.Main.controllers;
 
+import android.app.Application;
+
+import com.mapzen.speakerbox.Speakerbox;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -35,5 +39,24 @@ class JavaNetworkController <T> {
 
             }
         });
+    }
+
+    public void sayTTS(final String sentence, final Application application)
+    {
+        Thread thread = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Speakerbox speakerbox = new Speakerbox(application);
+
+                speakerbox.play(sentence);
+
+
+            }
+        });
+
+        thread.start();
+
     }
 }
