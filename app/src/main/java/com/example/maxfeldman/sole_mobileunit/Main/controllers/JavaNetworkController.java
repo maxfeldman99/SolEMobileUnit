@@ -41,22 +41,5 @@ class JavaNetworkController <T> {
         });
     }
 
-    public void sayTTS(final String sentence, final Application application)
-    {
-        Thread thread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                Speakerbox speakerbox = new Speakerbox(application);
 
-                speakerbox.play(sentence);
-
-
-            }
-        });
-
-        thread.start();
-
-    }
 }

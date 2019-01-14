@@ -55,8 +55,6 @@ object NetworkController
 
         val javaNetworkController = JavaNetworkController.getInstance()
 
-        javaNetworkController.sayTTS(sentence,application);
-
 //        GlobalScope.launch(Dispatchers.Main)
 //        {
 //
