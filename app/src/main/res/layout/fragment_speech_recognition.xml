@@ -46,7 +46,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:id="@+id/lin3"
         android:orientation="vertical"
         android:layout_below="@id/lin2"
@@ -60,6 +60,21 @@
             android:id="@+id/speech_output"
             />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lin4"
+        android:orientation="horizontal"
+        android:layout_below="@id/lin3"
+        >
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="activate"
+            android:id="@+id/activate_btn"
+            />
     </LinearLayout>
 
 </RelativeLayout>
