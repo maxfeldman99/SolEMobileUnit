@@ -35,6 +35,7 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
     private VideoFragment.OnFragmentInteractionListener mListener;
     final Fragment imageTestFragment = new ImageTestFragment();
     final Fragment inputTestFragment = new InputTestFragment();
+    NetworkController networkController = NetworkController.INSTANCE;
 
 
     public TestFragment() {
@@ -114,7 +115,8 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                test_execute(tosend,"waiting","SOL-E-JR WAITING MODE");
+                networkController.sayTTS("bla bla bla bla bla bla bla bla",getContext());
+                //test_execute(tosend,"waiting","SOL-E-JR WAITING MODE");
             }
         });
 
