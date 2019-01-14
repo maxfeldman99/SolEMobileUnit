@@ -33,6 +33,9 @@ public class InputTestFragment extends Fragment {
     private TextToSpeech mTTS;
     private String taskText = "spell correct the content of the image";
 
+    NetworkController networkController = NetworkController.INSTANCE;
+
+
     public InputTestFragment() {
         // Required empty public constructor
     }
@@ -58,6 +61,10 @@ public class InputTestFragment extends Fragment {
                 if (answerEditText.getText().toString().equals(answer)) {
                     correct=true;
                     test_execute(null, "happy", null);
+
+                    networkController.sayTTS("All Right!!",getActivity().getApplication());
+
+
                 } else {
 
                 }
@@ -83,7 +90,9 @@ public class InputTestFragment extends Fragment {
 
             public void onFinish() {
                 timerText.setText("0");
-                if(correct!=true) {
+                if(correct!=true)
+                {
+
                     test_execute(null, "sad", null);
                 }
             }
@@ -106,10 +115,16 @@ public class InputTestFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, videoFragment).commit();
     }
 
-    private void speak(String speechText,float pitch,float speed){
-        mTTS.setSpeechRate(speed);
-        mTTS.setPitch(pitch);
-        mTTS.speak(speechText, TextToSpeech.QUEUE_FLUSH,null);
+    private void speak(String speechText,float pitch,float speed)
+    {
+
+
+        networkController.sayTTS("Testig",getActivity().getApplication());
+
+        //mTTS.setSpeechRate(speed);
+       // mTTS.setPitch(pitch);
+       // mTTS.speak(speechText, TextToSpeech.QUEUE_FLUSH,null);
+
 
     }
 
