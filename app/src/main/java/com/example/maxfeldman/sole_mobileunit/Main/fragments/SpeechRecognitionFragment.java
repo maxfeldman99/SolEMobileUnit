@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.maxfeldman.sole_mobileunit.R;
 import com.github.zagum.speechrecognitionview.RecognitionProgressView;
@@ -18,18 +21,25 @@ import com.github.zagum.speechrecognitionview.adapters.RecognitionListenerAdapte
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SpeechRecognitionFragment extends Fragment {
 
-    private SpeechRecognizer speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
+    private SpeechRecognizer speechRecognizer;
     private TextView textViewOutput;
 
     public SpeechRecognitionFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +47,7 @@ public class SpeechRecognitionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_speech_recognition, container, false);
         Button button = view.findViewById(R.id.activate_btn);
+        Button buttonStop = view.findViewById(R.id.stop_btn);
         textViewOutput = view.findViewById(R.id.speech_output);
 
         // speech recognition view
@@ -54,13 +65,15 @@ public class SpeechRecognitionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startRecognition();
-//                recognitionProgressView.play();
-//                try {
-//                    Thread.sleep(2000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                recognitionProgressView.stop();
+                recognitionProgressView.play();
+
+            }
+        });
+
+        buttonStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recognitionProgressView.stop();
             }
         });
 
@@ -78,7 +91,14 @@ public class SpeechRecognitionFragment extends Fragment {
     }
 
     private void showResults(Bundle results){
-        //textViewOutput.setText();
+        ArrayList<String> matches = results
+
+                .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+        Log.e("speech",matches.toString());
+        Toast.makeText(getContext(), matches.get(0), Toast.LENGTH_LONG).show();
+
+        textViewOutput.setText(matches.get(0));
     }
 
 }

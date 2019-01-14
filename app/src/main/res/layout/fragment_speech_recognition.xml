@@ -75,6 +75,12 @@
             android:text="activate"
             android:id="@+id/activate_btn"
             />
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="stop"
+            android:id="@+id/stop_btn"
+            />
     </LinearLayout>
 
 </RelativeLayout>

@@ -35,6 +35,7 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
     private VideoFragment.OnFragmentInteractionListener mListener;
     final Fragment imageTestFragment = new ImageTestFragment();
     final Fragment inputTestFragment = new InputTestFragment();
+    final Fragment speechTestRecognition = new SpeechRecognitionFragment();
     NetworkController networkController = NetworkController.INSTANCE;
 
 
@@ -84,6 +85,7 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
         Button buttonSpeak = view.findViewById(R.id.test_btn_tts);
         Button buttonImage = view.findViewById(R.id.image_test_btn);
         Button buttonInput = view.findViewById(R.id.input_test_btn);
+        Button buttonSpeech = view.findViewById(R.id.speech_rec_btn);
 
         mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -124,6 +126,7 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
 
 
 
+
         buttonSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,6 +150,13 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,inputTestFragment).commit();
+            }
+        });
+
+        buttonSpeech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,speechTestRecognition).commit();
             }
         });
 
