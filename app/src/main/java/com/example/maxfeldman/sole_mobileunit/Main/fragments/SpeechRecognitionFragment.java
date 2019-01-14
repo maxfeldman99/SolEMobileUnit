@@ -1,12 +1,17 @@
 package com.example.maxfeldman.sole_mobileunit.Main.fragments;
 
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +24,6 @@ import com.example.maxfeldman.sole_mobileunit.R;
 import com.github.zagum.speechrecognitionview.RecognitionProgressView;
 import com.github.zagum.speechrecognitionview.adapters.RecognitionListenerAdapter;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 /**
@@ -30,6 +33,12 @@ public class SpeechRecognitionFragment extends Fragment {
 
     private SpeechRecognizer speechRecognizer;
     private TextView textViewOutput;
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION_CODE = 1;
+    private RecognitionProgressView recognitionProgressView;
+    int[] colors = new int[5];
+
+
+
 
     public SpeechRecognitionFragment() {
         // Required empty public constructor
@@ -46,34 +55,95 @@ public class SpeechRecognitionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_speech_recognition, container, false);
-        Button button = view.findViewById(R.id.activate_btn);
-        Button buttonStop = view.findViewById(R.id.stop_btn);
+        Button buttonStart = view.findViewById(R.id.activate_btn);
+        Button buttonReset = view.findViewById(R.id.stop_btn);
         textViewOutput = view.findViewById(R.id.speech_output);
 
-        // speech recognition view
+         //speech recognition view
+        colors[0] =ContextCompat.getColor(getContext(), R.color.color1);
+        colors[1] =ContextCompat.getColor(getContext(), R.color.color2);
+        colors[2] =ContextCompat.getColor(getContext(), R.color.color3);
+        colors[3] =ContextCompat.getColor(getContext(), R.color.color4);
+        colors[4] =ContextCompat.getColor(getContext(), R.color.color5);
 
-        final RecognitionProgressView recognitionProgressView = (RecognitionProgressView) view.findViewById(R.id.recognition_view);
+
+
+
+
+        recognitionProgressView = (RecognitionProgressView) view.findViewById(R.id.recognition_view);
         recognitionProgressView.setSpeechRecognizer(speechRecognizer);
         recognitionProgressView.setRecognitionListener(new RecognitionListenerAdapter() {
             @Override
             public void onResults(Bundle results) {
+                recognitionProgressView.setColors(colors);
+//
+//                recognitionProgressView.setBarMaxHeightsInDp(heights);
+//
+//                recognitionProgressView.setCircleRadiusInDp(2);
+//
+//
+//
+//                recognitionProgressView.setRotationRadiusInDp(10);
+
+                recognitionProgressView.play();
                 showResults(results);
             }
         });
+        recognitionProgressView.setColors(colors);
+//
+//        recognitionProgressView.setBarMaxHeightsInDp(heights);
+//
+//        recognitionProgressView.setCircleRadiusInDp(2);
+//
+//        recognitionProgressView.setSpacingInDp(2);
+//
+//        recognitionProgressView.setIdleStateAmplitudeInDp(2);
+//
+//        recognitionProgressView.setRotationRadiusInDp(10);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        recognitionProgressView.play();
+
+        buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startRecognition();
-                recognitionProgressView.play();
+                if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
+
+                        Manifest.permission.RECORD_AUDIO)
+
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                        requestPermission();
+
+                } else {
+
+                    startRecognition();
+
+                    recognitionProgressView.postDelayed(new Runnable() {
+
+                        @Override
+
+                        public void run() {
+
+                            startRecognition();
+
+                        }
+
+                    }, 50);
+
+                }
 
             }
+
         });
 
-        buttonStop.setOnClickListener(new View.OnClickListener() {
+
+
+        buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 recognitionProgressView.stop();
+                recognitionProgressView.play();
+                textViewOutput.setText("");
             }
         });
 
@@ -99,6 +169,41 @@ public class SpeechRecognitionFragment extends Fragment {
         Toast.makeText(getContext(), matches.get(0), Toast.LENGTH_LONG).show();
 
         textViewOutput.setText(matches.get(0));
+        recognitionProgressView.stop();
+        recognitionProgressView.play();
+
     }
 
-}
+    private void requestPermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) getContext(),
+
+                Manifest.permission.RECORD_AUDIO)) {
+
+            Toast.makeText(getContext(), "Requires RECORD_AUDIO permission", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            ActivityCompat.requestPermissions((Activity) getContext(),
+
+                    new String[] { Manifest.permission.RECORD_AUDIO },
+
+                    REQUEST_RECORD_AUDIO_PERMISSION_CODE);
+
+        }
+
+    }
+    @Override
+    public void onDestroy() {
+
+        if (speechRecognizer != null) {
+
+            speechRecognizer.destroy();
+
+        }
+
+        super.onDestroy();
+
+    }
+
+    }
