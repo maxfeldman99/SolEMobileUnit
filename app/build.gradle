@@ -36,9 +36,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1"
+    implementation 'com.github.zagum:SpeechRecognitionView:1.2.2' // speech recognition
+
 
 
 }
 repositories {
     mavenCentral()
+    maven { url "https://jitpack.io" }
 }
+

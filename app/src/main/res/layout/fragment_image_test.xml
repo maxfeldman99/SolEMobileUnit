@@ -75,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="Choose the sun color"
                 android:textAlignment="center"
+                android:id="@+id/task_text"
                 />
         </LinearLayout>
         <LinearLayout

@@ -1,8 +1,10 @@
 package com.example.maxfeldman.sole_mobileunit.Main.fragments;
 
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.maxfeldman.sole_mobileunit.Main.Helpers.TTS;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.models.Request;
 import com.example.maxfeldman.sole_mobileunit.R;
