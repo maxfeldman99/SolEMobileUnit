@@ -1,7 +1,10 @@
 package com.example.maxfeldman.sole_mobileunit.Main.controllers
 
+import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.speech.tts.TextToSpeech
+import com.mapzen.speakerbox.Speakerbox
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -47,24 +50,13 @@ object NetworkController
 
     }
 
-    fun sayTTS(sentence: String, context: Context)
+    fun sayTTS(sentence: String, application: Application)
     {
         GlobalScope.launch(Dispatchers.Main)
         {
 
-            var tts = TextToSpeech(null, null)
-
-            tts = TextToSpeech(context, object : TextToSpeech.OnInitListener {
-                override fun onInit(status: Int) {
-                    if (status == TextToSpeech.SUCCESS) {
-                        tts.language = Locale.US
-                    }
-                }
-
-            })
-
-            tts.speak(sentence, TextToSpeech.QUEUE_FLUSH,null)
-
+            val speaker = Speakerbox(application)
+            speaker.play(sentence)
         }
 
 
