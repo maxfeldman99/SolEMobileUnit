@@ -1,5 +1,9 @@
 package com.example.maxfeldman.sole_mobileunit.Main.controllers;
 
+import android.app.Application;
+
+import com.mapzen.speakerbox.Speakerbox;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -36,4 +40,6 @@ class JavaNetworkController <T> {
             }
         });
     }
+
+
 }

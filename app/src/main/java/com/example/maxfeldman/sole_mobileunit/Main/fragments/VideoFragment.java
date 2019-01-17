@@ -110,7 +110,6 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
         videoView.setVideoURI(uri);
         final Uri temp = uri;
 
-
 //                videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() { // this section is for looping
 //                    @Override
 //                    public void onPrepared(MediaPlayer mp) {
@@ -131,9 +130,6 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
              }
          });
-
-
-
 
 
 

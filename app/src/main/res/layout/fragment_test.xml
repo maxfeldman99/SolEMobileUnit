@@ -86,17 +86,24 @@
 
             <Button
                 android:id="@+id/image_test_btn"
-                android:layout_width="300dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/test_btn2"
                 android:text="Image Test"
                 />
             <Button
                 android:id="@+id/input_test_btn"
-                android:layout_width="300dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/test_btn2"
                 android:text="Input Test"
+                />
+            <Button
+                android:id="@+id/speech_rec_btn"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="speech-reco"
+
                 />
         </LinearLayout>
 

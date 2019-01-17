@@ -1,8 +1,10 @@
 package com.example.maxfeldman.sole_mobileunit.Main.fragments;
 
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.maxfeldman.sole_mobileunit.Main.Helpers.TTS;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.models.Request;
 import com.example.maxfeldman.sole_mobileunit.R;
@@ -32,6 +35,10 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
     private VideoFragment.OnFragmentInteractionListener mListener;
     final Fragment imageTestFragment = new ImageTestFragment();
     final Fragment inputTestFragment = new InputTestFragment();
+    final Fragment speechTestRecognition = new SpeechRecognitionFragment();
+    NetworkController networkController = NetworkController.INSTANCE;
+
+
 
 
     public TestFragment() {
@@ -78,6 +85,7 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
         Button buttonSpeak = view.findViewById(R.id.test_btn_tts);
         Button buttonImage = view.findViewById(R.id.image_test_btn);
         Button buttonInput = view.findViewById(R.id.input_test_btn);
+        Button buttonSpeech = view.findViewById(R.id.speech_rec_btn);
 
         mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -111,9 +119,11 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                test_execute(tosend,"waiting","SOL-E-JR WAITING MODE");
+                networkController.sayTTS("bla bla bla bla bla bla bla bla",getActivity().getApplication());
+                //test_execute(tosend,"waiting","SOL-E-JR WAITING MODE");
             }
         });
+
 
 
 
@@ -140,6 +150,13 @@ public class TestFragment extends Fragment implements VideoFragment.OnFragmentIn
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,inputTestFragment).commit();
+            }
+        });
+
+        buttonSpeech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,speechTestRecognition).commit();
             }
         });
 

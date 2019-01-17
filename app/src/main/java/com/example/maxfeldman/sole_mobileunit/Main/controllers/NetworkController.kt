@@ -1,11 +1,17 @@
 package com.example.maxfeldman.sole_mobileunit.Main.controllers
 
+import android.app.Activity
+import android.app.Application
+import android.content.Context
+import android.speech.tts.TextToSpeech
+import com.mapzen.speakerbox.Speakerbox
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.ObjectOutputStream
 import java.io.OutputStream
 import java.net.Socket
+import java.util.*
 
 /*
        object = Singleton
@@ -43,5 +49,22 @@ object NetworkController
         }
 
     }
+
+    fun sayTTS(sentence: String, application: Application)
+    {
+
+        val javaNetworkController = JavaNetworkController.getInstance()
+
+//        GlobalScope.launch(Dispatchers.Main)
+//        {
+//
+//            val speaker = Speakerbox(application)
+//            speaker.play(sentence)
+//        }
+
+
+
+    }
+
 
 }

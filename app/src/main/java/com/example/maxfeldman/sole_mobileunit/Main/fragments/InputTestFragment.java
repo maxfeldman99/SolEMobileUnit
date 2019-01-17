@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.R;
 
@@ -31,6 +32,9 @@ public class InputTestFragment extends Fragment {
     private int myTime;
     private boolean correct = false;
     private TextToSpeech mTTS;
+    private String taskText = "spell correct the content of the image";
+
+    NetworkController networkController = NetworkController.INSTANCE;
 
     public InputTestFragment() {
         // Required empty public constructor
@@ -45,28 +49,11 @@ public class InputTestFragment extends Fragment {
         final EditText answerEditText = view.findViewById(R.id.question_answer_text);
         timerText = view.findViewById(R.id.timer_text);
         Button submitBtn = view.findViewById(R.id.submit_btn);
+        TextView question = view.findViewById(R.id.question_text);
         activateTimer(QUESTION_TIME);
 
 
-
-        mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status == TextToSpeech.SUCCESS){
-                    int result = mTTS.setLanguage(Locale.US);
-                    if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
-                        Log.e("TTS","not supported language");
-
-                    }else{
-                        Log.e("TTS","failed to initalize");
-                    }
-                }
-            }
-        });
-
-
-
-
+        initializeTTS();
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +61,10 @@ public class InputTestFragment extends Fragment {
                 if (answerEditText.getText().toString().equals(answer)) {
                     correct=true;
                     test_execute(null, "happy", null);
+
+                    networkController.sayTTS("All Right!!",getActivity().getApplication());
+
+
                 } else {
 
                 }
@@ -99,7 +90,9 @@ public class InputTestFragment extends Fragment {
 
             public void onFinish() {
                 timerText.setText("0");
-                if(correct!=true) {
+                if(correct!=true)
+                {
+
                     test_execute(null, "sad", null);
                 }
             }
@@ -122,13 +115,46 @@ public class InputTestFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, videoFragment).commit();
     }
 
-    private void speak(String speechText,float pitch,float speed){
-        mTTS.setSpeechRate(speed);
-        mTTS.setPitch(pitch);
-        mTTS.speak(speechText, TextToSpeech.QUEUE_FLUSH,null);
+    private void speak(String speechText,float pitch,float speed)
+    {
+
+
+        networkController.sayTTS("Testig",getActivity().getApplication());
+
+        //mTTS.setSpeechRate(speed);
+       // mTTS.setPitch(pitch);
+       // mTTS.speak(speechText, TextToSpeech.QUEUE_FLUSH,null);
+
 
     }
 
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mTTS==null){
+            initializeTTS();
+        }
+        speak(taskText,0.4f,0.9f);
+    }
+
+    private void initializeTTS(){
+        mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS){
+                    int result = mTTS.setLanguage(Locale.US);
+                    if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e("TTS","not supported language");
+
+                    }else{
+                        Log.e("TTS","failed to initalize");
+                    }
+                }
+            }
+        });
+    }
 
 }
 

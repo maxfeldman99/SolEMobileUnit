@@ -27,8 +27,9 @@ import java.util.Locale;
 public class ImageTestFragment extends Fragment {
 
 
-    private TextToSpeech mTTS;
+    private TextToSpeech mTTS = null;
     private int counter = 3;
+    private String taskSpeech = "Choose the sun color";
 
 
 
@@ -48,6 +49,7 @@ public class ImageTestFragment extends Fragment {
         ImageButton button3 = view.findViewById(R.id.im_btn_3);
         ImageButton button4 = view.findViewById(R.id.im_btn_4);
         final TextView mistakes = view.findViewById(R.id.text_mistakes_counter);
+        TextView taskText = view.findViewById(R.id.task_text);
 
 
         /// motor section
@@ -74,20 +76,7 @@ public class ImageTestFragment extends Fragment {
 
 
 
-        mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status == TextToSpeech.SUCCESS){
-                    int result = mTTS.setLanguage(Locale.US);
-                    if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
-                        Log.e("TTS","not supported language");
-
-                    }else{
-                        Log.e("TTS","failed to initalize");
-                    }
-                }
-            }
-        });
+        initializeTTS();
 
 
 
@@ -159,6 +148,32 @@ public class ImageTestFragment extends Fragment {
         mTTS.setPitch(pitch);
         mTTS.speak(speechText,TextToSpeech.QUEUE_FLUSH,null);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mTTS==null){
+            initializeTTS();
+        }
+        speak(taskSpeech,0.4f,0.9f);
+    }
+
+    private void initializeTTS(){
+        mTTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS){
+                    int result = mTTS.setLanguage(Locale.US);
+                    if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e("TTS","not supported language");
+
+                    }else{
+                        Log.e("TTS","failed to initalize");
+                    }
+                }
+            }
+        });
     }
 
 }
