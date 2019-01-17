@@ -4,13 +4,13 @@ import android.app.Application;
 
 import com.mapzen.speakerbox.Speakerbox;
 
-class Utilities {
+public class Utilities  {
 
     private static final Utilities ourInstance = new Utilities();
 
 
 
-    static Utilities getInstance() {
+    public static Utilities getInstance() {
         return ourInstance;
     }
 
@@ -24,7 +24,6 @@ class Utilities {
             public void run()
             {
                 Speakerbox speakerbox = new Speakerbox(application);
-
                 speakerbox.play(sentence);
 
 

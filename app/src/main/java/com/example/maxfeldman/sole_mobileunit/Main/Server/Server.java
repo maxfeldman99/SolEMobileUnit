@@ -72,17 +72,29 @@ public class Server implements Runnable {
                 socket  = serverSocket.accept();
                 Log.d("test","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 inputStream = new ObjectInputStream(socket.getInputStream());
-               // outputStream = new ObjectOutputStream(socket.getOutputStream());
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
                 String message = null;
                 try {
                     message = (String)inputStream.readObject();
-                    if(message!=null) {
-                        Log.e("wtf",message);
-                        //support.firePropertyChange(serverMessage, "standby",message);
-                        mainController.executeVideo(message);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                String compMessage = null;
+                String test = "ack";
+                try {
+                    if(message!=null){
+                        if(message.equals("max")){
+                            outputStream.writeObject(test);
+                        }else{
+                            Log.e("wtf",message);
+                            //support.firePropertyChange(serverMessage, "standby",message);
+                            mainController.executeVideo(message);
+                        }
                     }else{
                         Log.e("wtf","message is null");
                     }
+
+
                     //controller.executeSequence(request.getSequence());
 
                 } catch (Exception e) {

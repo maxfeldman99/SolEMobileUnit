@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
         setContentView(R.layout.activity_main);
 
 
-
        // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
         final Fragment videoFragment = new VideoFragment();
         final Fragment sessionFragment = new SessionFragment();

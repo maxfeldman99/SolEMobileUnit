@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.example.maxfeldman.sole_mobileunit.R;
 import com.github.zagum.speechrecognitionview.RecognitionProgressView;
 import com.github.zagum.speechrecognitionview.adapters.RecognitionListenerAdapter;
@@ -36,6 +37,7 @@ public class SpeechRecognitionFragment extends Fragment {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION_CODE = 1;
     private RecognitionProgressView recognitionProgressView;
     int[] colors = new int[5];
+    private Utilities utilities = Utilities.getInstance();
 
 
 
