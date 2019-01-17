@@ -68,7 +68,10 @@ public class Server implements Runnable {
         {
             try
             {
-                serverSocket= new ServerSocket(PORT);
+                if(serverSocket == null)
+                {
+                    serverSocket = new ServerSocket(PORT);
+                }
                 socket  = serverSocket.accept();
                 Log.d("test","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 inputStream = new ObjectInputStream(socket.getInputStream());
@@ -110,7 +113,7 @@ public class Server implements Runnable {
             } finally {
 
                 try {
-                    serverSocket.close();
+                    //serverSocket.close();
 
                     //SERVER_IS_RUNNING = false;
                 } catch (Exception e) {

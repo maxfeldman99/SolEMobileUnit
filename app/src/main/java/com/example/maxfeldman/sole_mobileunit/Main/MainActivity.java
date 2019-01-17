@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mainController.setMainActivity(this);
 
        // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
         final Fragment videoFragment = new VideoFragment();
@@ -57,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
         getSupportFragmentManager().beginTransaction().replace(R.id.container,videoFragment).commit();
 
         mainController.setVideoFragment((VideoFragment) videoFragment);
-
         //VideoFragment fragment = (VideoFragment) getSupportFragmentManager().findFragmentByTag("video");
         //fragment.OnVideoChanged("sad");
         //fragment.newInstance("happy");
