@@ -81,6 +81,15 @@
             android:text="reset"
             android:id="@+id/stop_btn"
             />
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/acc_text"
+            android:text="Answer Accuracy:"
+            android:textSize="25dp"
+            android:layout_marginLeft="50dp"
+
+            />
     </LinearLayout>
 
 </RelativeLayout>
