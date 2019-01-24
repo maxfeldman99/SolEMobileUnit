@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
 import com.example.maxfeldman.sole_mobileunit.Main.models.Answer;
 import com.example.maxfeldman.sole_mobileunit.Main.models.ContentRequest;
+import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.google.gson.Gson;
 
 import java.beans.PropertyChangeListener;
@@ -91,6 +92,7 @@ public class Server implements Runnable {
                         }else{
                             Log.e("wtf",message);
                             //support.firePropertyChange(serverMessage, "standby",message);
+                            Utilities.getInstance().loopTest(false);
                             mainController.executeVideo(message);
                         }
                     }else{

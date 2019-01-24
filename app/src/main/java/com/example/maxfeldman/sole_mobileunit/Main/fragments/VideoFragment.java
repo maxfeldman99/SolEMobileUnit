@@ -7,13 +7,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.VideoView;
 
 
+import com.example.maxfeldman.sole_mobileunit.Main.MainActivity;
 import com.example.maxfeldman.sole_mobileunit.Main.models.OnDataChangedListener;
+import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.example.maxfeldman.sole_mobileunit.R;
 
 
@@ -106,27 +109,29 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
 
     private void executeVideo(Uri uri, final int delayTime){
-
+        final VideoFragment videoFragment = VideoFragment.newInstance("waiting");
         videoView.setVideoURI(uri);
         final Uri temp = uri;
 
-//                videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() { // this section is for looping
-//                    @Override
-//                    public void onPrepared(MediaPlayer mp) {
-//                        mp.setLooping(true);
-//
-//                    }
-//                });
+                videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() { // this section is for looping
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                       mp.setLooping(true);
+                       Utilities.getInstance().setMediaPlayer(mp);
+                       Utilities.getInstance().loopTest(true);
+
+
+                    }
+                });
          videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
          {
              @Override
              public void onCompletion(MediaPlayer mediaPlayer) {
-//                 counter++;
 //                 while(videoLoop == true) {
 //                     executeVideo(temp, 0);
 //                 }
 
-                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, testFragment).commit();
+                    // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, videoFragment).commit();
 
              }
          });

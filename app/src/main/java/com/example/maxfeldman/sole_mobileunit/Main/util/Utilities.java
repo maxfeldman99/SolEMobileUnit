@@ -1,6 +1,7 @@
 package com.example.maxfeldman.sole_mobileunit.Main.util;
 
 import android.app.Application;
+import android.media.MediaPlayer;
 
 import com.mapzen.speakerbox.Speakerbox;
 
@@ -8,6 +9,8 @@ public class Utilities  {
 
     private static final Utilities ourInstance = new Utilities();
 
+    private boolean loop = true;
+    private MediaPlayer mp;
 
 
     public static Utilities getInstance() {
@@ -15,6 +18,18 @@ public class Utilities  {
     }
 
     private Utilities() { }
+
+    public void setLoop(boolean loop){
+        this.loop = loop;
+    }
+
+    public void setMediaPlayer(MediaPlayer mp){
+        this.mp = mp;
+    }
+
+    public MediaPlayer getMediaPlayer(){
+        return this.mp;
+    }
 
     public void sayTTS(final String sentence, final Application application)
     {
@@ -31,6 +46,13 @@ public class Utilities  {
         });
 
         thread.start();
+
+    }
+
+    public void loopTest(boolean loop){
+        setLoop(loop);
+
+        mp.setLooping(loop);
 
     }
 

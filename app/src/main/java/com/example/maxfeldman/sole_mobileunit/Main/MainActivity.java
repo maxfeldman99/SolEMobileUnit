@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
     private static String serverMessage = "standby";
     PojoConverter pojoConverter = new PojoConverter();
     MainController mainController = MainController.getInstance();
+    private boolean loopTest = true;
 
 
 
@@ -130,6 +131,10 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 //        }
 //
 
+    }
+
+    public void loopTest(boolean loop){
+        loopTest = loop;
     }
 
 
