@@ -109,16 +109,21 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
 
     private void executeVideo(Uri uri, final int delayTime){
-        final VideoFragment videoFragment = VideoFragment.newInstance("waiting");
+        final VideoFragment videoFragment = VideoFragment.newInstance(currentVideo);
         videoView.setVideoURI(uri);
         final Uri temp = uri;
 
                 videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() { // this section is for looping
                     @Override
                     public void onPrepared(MediaPlayer mp) {
-                       mp.setLooping(true);
-                       Utilities.getInstance().setMediaPlayer(mp);
-                       Utilities.getInstance().loopTest(true);
+                        if(currentVideo==null){
+                            currentVideo = WAITING;
+                        }
+                       if(currentVideo.equals(WAITING)) {
+                           mp.setLooping(true);
+                           Utilities.getInstance().setMediaPlayer(mp);
+                           Utilities.getInstance().loopTest(true);
+                       }
 
 
                     }
@@ -131,7 +136,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 //                     executeVideo(temp, 0);
 //                 }
 
-                    // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, videoFragment).commit();
+                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, videoFragment).commit();
 
              }
          });
@@ -154,6 +159,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     public void chooseEmotion(String videoType){
         Uri uri = null;
         String pathName = null;
+        currentVideo = videoType;
         switch (videoType) {
 
             case HAPPY:
