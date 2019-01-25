@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-class JavaNetworkController <T> {
+public class JavaNetworkController <T> {
     private static final JavaNetworkController ourInstance = new JavaNetworkController();
 
-    static JavaNetworkController getInstance() {
+    public static JavaNetworkController getInstance() {
         return ourInstance;
     }
 

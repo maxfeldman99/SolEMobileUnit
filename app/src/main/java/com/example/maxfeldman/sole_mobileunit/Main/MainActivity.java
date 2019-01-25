@@ -11,8 +11,10 @@ import android.os.Bundle;
 
 
 import com.example.maxfeldman.sole_mobileunit.Main.Helpers.PojoConverter;
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.JavaNetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.VideoController;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.ImageTestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.InputTestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.SessionFragment;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,10 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
         //fragment.newInstance("happy");
 
         mainController.startServer();
+
+
+
+
 
 
 

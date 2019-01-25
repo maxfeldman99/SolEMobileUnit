@@ -10,18 +10,26 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
 import com.example.maxfeldman.sole_mobileunit.R;
 
-class VideoController
+public class VideoController
 {
     private static final VideoController ourInstance = new VideoController();
 
     private VideoFragment videoFragment;
+    private String emotion;
 
-    static VideoController getInstance() {
+    public static VideoController getInstance() {
         return ourInstance;
     }
 
     private VideoController() {
     }
+
+    public void setVideoFragment(VideoFragment fragment)
+    {
+        this.videoFragment = fragment;
+    }
+
+
 
     public void setVideoFragment(VideoFragment fragment, AppCompatActivity mainActivity)
     {
@@ -35,8 +43,13 @@ class VideoController
 
     public void setVideoContent(String emotion)
     {
-        videoFragment.chooseEmotion(emotion);
+        videoFragment.OnVideoChanged(emotion);
+        this.emotion = emotion;
 
+    }
+
+    public String getVideoContent(){
+        return emotion;
     }
 
 

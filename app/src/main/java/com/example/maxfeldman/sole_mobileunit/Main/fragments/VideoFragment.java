@@ -15,6 +15,7 @@ import android.widget.VideoView;
 
 
 import com.example.maxfeldman.sole_mobileunit.Main.MainActivity;
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.VideoController;
 import com.example.maxfeldman.sole_mobileunit.Main.models.OnDataChangedListener;
 import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.example.maxfeldman.sole_mobileunit.R;
@@ -51,6 +52,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     final Fragment sessionFragment = new SessionFragment();
     final Fragment testFragment = new TestFragment();
 
+    public VideoController videoController;
 
 
 
@@ -77,15 +79,27 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
+
+        videoController = VideoController.getInstance();
+
+        videoController.setVideoFragment(this);
 
         View view = inflater.inflate(R.layout.fragment_video_fragment, container, false);
         videoView = view.findViewById(R.id.myVideoView);
-        chooseEmotion(WAITING);
-        if(getArguments() != null){
+
+        if(getArguments() != null) {
             currentVideo = getArguments().getString(ARG_TEXT);
             chooseEmotion(currentVideo);
         }
+
+        if(currentVideo==null){
+            currentVideo=WAITING;
+            chooseEmotion(currentVideo);
+        }
+
+
 
 
         // Inflate the layout for this fragment
@@ -96,7 +110,8 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
 
     @Override
-    public void OnVideoChanged(String videoType) {
+    public void OnVideoChanged(String videoType)
+    {
         chooseEmotion(videoType);
     }
 
@@ -105,6 +120,8 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 
 
 
@@ -149,6 +166,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
                 @Override
                 public void run() {
 
+
                 }
             }, delayTime);
 
@@ -160,6 +178,9 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
         Uri uri = null;
         String pathName = null;
         currentVideo = videoType;
+        if(!currentVideo.equals(WAITING)){
+            Utilities.getInstance().sendToRobot(currentVideo);
+        }
         switch (videoType) {
 
             case HAPPY:

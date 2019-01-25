@@ -17,7 +17,8 @@ public class MainController {
     private static Server serverController;
     private static VideoController videoController;
     private static MongoDB mongoDB;
-    private static NetworkController networkController;
+    //private static NetworkController networkController;
+    private static JavaNetworkController networkController;
     AppCompatActivity mainActivity;
 
 
@@ -25,7 +26,7 @@ public class MainController {
         this.serverController = new Server(this);
         this.videoController = VideoController.getInstance();
         //this.mongoDB = MongoDB.getInstance();
-        this.networkController = NetworkController.INSTANCE; // because its written in kotlin
+        this.networkController = JavaNetworkController.getInstance(); // because its written in kotlin
     }
 
     private static MainController instance = null;
