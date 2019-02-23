@@ -64,21 +64,34 @@ public class Utilities {
 
     }
 
+//    public Request getHappy() {
+//
+//        final ArrayList<MotorRequest> motorRequests = new ArrayList<>();
+//        MotorRequest motorRequest1 = new MotorRequest("1", "C", "200", "70", "1000");
+//
+//        motorRequests.add(motorRequest1);
+//
+//
+//        final Request request = new Request("1", motorRequests, motorRequests.size());
+//
+//        return  request;
+//    }
+
     public Request getHappy() {
 
         final ArrayList<MotorRequest> motorRequests = new ArrayList<>();
-       // MotorRequest motorRequest1 = new MotorRequest("1", "C", "200", "70", "1000");
-        //MotorRequest motorRequest2 = new MotorRequest("2", "C", "200", "-70", "0");
-        MotorRequest motorRequest3 = new MotorRequest("3", "A", "200", "70", "0");
-        MotorRequest motorRequest4 = new MotorRequest("4", "B", "200", "70", "1000");
-        MotorRequest motorRequest5 = new MotorRequest("5", "A", "200", "-70", "0");
-        MotorRequest motorRequest6 = new MotorRequest("6", "B", "200", "-70", "1000");
-        MotorRequest motorRequest7 = new MotorRequest("7", "A", "200", "70", "0");
-        MotorRequest motorRequest8 = new MotorRequest("8", "B", "200", "70", "1000");
-        MotorRequest motorRequest9 = new MotorRequest("9", "A", "200", "-70", "0");
-        MotorRequest motorRequest10 = new MotorRequest("10", "B", "200", "-70", "0");
-        //motorRequests.add(motorRequest1);
-        //motorRequests.add(motorRequest2);
+        MotorRequest motorRequest1 = new MotorRequest("1", "C", "200", "35", "1000");
+        MotorRequest motorRequest2 = new MotorRequest("2", "C", "200", "-35", "0");
+        MotorRequest motorRequest3 = new MotorRequest("3", "A", "200", "35", "0");
+        MotorRequest motorRequest4 = new MotorRequest("4", "B", "200", "35", "1000");
+        MotorRequest motorRequest5 = new MotorRequest("5", "A", "200", "-35", "0");
+        MotorRequest motorRequest6 = new MotorRequest("6", "B", "200", "-35", "1000");
+        MotorRequest motorRequest7 = new MotorRequest("7", "A", "200", "35", "0");
+        MotorRequest motorRequest8 = new MotorRequest("8", "B", "200", "35", "1000");
+        MotorRequest motorRequest9 = new MotorRequest("9", "A", "200", "-35", "0");
+        MotorRequest motorRequest10 = new MotorRequest("10", "B", "200", "-35", "0");
+        motorRequests.add(motorRequest1);
+        motorRequests.add(motorRequest2);
         motorRequests.add(motorRequest3);
         motorRequests.add(motorRequest4);
         motorRequests.add(motorRequest5);
@@ -96,15 +109,20 @@ public class Utilities {
     public Request getSad() {
 
         final ArrayList<MotorRequest> motorRequests = new ArrayList<>();
-        //MotorRequest motorRequest1 = new MotorRequest("1", "C", "25", "80", "2000");
-        //MotorRequest motorRequest2 = new MotorRequest("2", "C", "25", "-80", "0");
-        //MotorRequest motorRequest5 = new MotorRequest("5", "A", "200", "100", "0");
-        //MotorRequest motorRequest6 = new MotorRequest("6", "B", "200", "100", "0");
-       // motorRequests.add(motorRequest1);
-        //motorRequests.add(motorRequest2);
+        MotorRequest motorRequest1 = new MotorRequest("1", "C", "20", "40", "3000");
+        MotorRequest motorRequest2 = new MotorRequest("2", "C", "20", "-40", "0");
 
-        //motorRequests.add(motorRequest5);
-        //motorRequests.add(motorRequest6);
+
+//        MotorRequest motorRequest3 = new MotorRequest("5", "A", "200", "60", "0");
+//        MotorRequest motorRequest4 = new MotorRequest("6", "B", "200", "60", "1000");
+//        MotorRequest motorRequest5 = new MotorRequest("5", "A", "200", "-60", "0");
+//        MotorRequest motorRequest6 = new MotorRequest("6", "B", "200", "-60", "0");
+        motorRequests.add(motorRequest1);
+        motorRequests.add(motorRequest2);
+//        motorRequests.add(motorRequest3);
+//        motorRequests.add(motorRequest4);
+//        motorRequests.add(motorRequest5);
+//        motorRequests.add(motorRequest6);
 
         final Request request = new Request("2", motorRequests, motorRequests.size());
 
@@ -137,6 +155,35 @@ public class Utilities {
         return  request;
     }
 
+    public Request getFunny() {
+
+        final ArrayList<MotorRequest> motorRequests = new ArrayList<>();
+        MotorRequest motorRequest1 = new MotorRequest("1", "C", "200", "70", "1000");
+        MotorRequest motorRequest2 = new MotorRequest("2", "C", "200", "-70", "0");
+        MotorRequest motorRequest3 = new MotorRequest("3", "A", "200", "70", "0");
+        MotorRequest motorRequest4 = new MotorRequest("4", "B", "200", "70", "1000");
+        MotorRequest motorRequest5 = new MotorRequest("5", "A", "200", "-70", "0");
+        MotorRequest motorRequest6 = new MotorRequest("6", "B", "200", "-70", "1000");
+        MotorRequest motorRequest7 = new MotorRequest("7", "A", "200", "70", "0");
+        MotorRequest motorRequest8 = new MotorRequest("8", "B", "200", "70", "1000");
+        MotorRequest motorRequest9 = new MotorRequest("9", "A", "200", "-70", "0");
+        MotorRequest motorRequest10 = new MotorRequest("10", "B", "200", "-70", "0");
+        motorRequests.add(motorRequest1);
+        motorRequests.add(motorRequest2);
+        motorRequests.add(motorRequest3);
+        motorRequests.add(motorRequest4);
+        motorRequests.add(motorRequest5);
+        motorRequests.add(motorRequest6);
+        motorRequests.add(motorRequest7);
+        motorRequests.add(motorRequest8);
+        motorRequests.add(motorRequest9);
+        motorRequests.add(motorRequest10);
+
+        final Request request = new Request("1", motorRequests, motorRequests.size());
+
+        return  request;
+    }
+
     public void sendToRobot(String emotion){
         Request request = null;
         switch (emotion){
@@ -155,7 +202,7 @@ public class Utilities {
         Gson gson = new Gson();
         String data = gson.toJson(request);
         //networkController.sendDataToIp("192.168.43.4",data,null);
-        networkController2.sendDataToIp("192.168.43.4",data,null);
+        networkController2.sendDataToIp("192.168.1.52",data,null);
     }
 
 
