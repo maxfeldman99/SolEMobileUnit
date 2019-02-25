@@ -39,4 +39,13 @@ public class Request
     public int getSizeOfSequence() {
         return sizeOfSequence;
     }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "id='" + id + '\'' +
+                ", sequence=" + sequence +
+                ", sizeOfSequence=" + sizeOfSequence +
+                '}';
+    }
 }

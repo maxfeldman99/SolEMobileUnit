@@ -3,6 +3,8 @@ package com.example.maxfeldman.sole_mobileunit.Main.util;
 import android.app.Application;
 import android.media.MediaPlayer;
 
+import com.example.maxfeldman.sole_mobileunit.Main.Helpers.DataListener;
+import com.example.maxfeldman.sole_mobileunit.Main.Helpers.FireBase;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.JavaNetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.models.MotorRequest;
@@ -18,6 +20,8 @@ public class Utilities {
 
     private boolean loop = true;
     private MediaPlayer mp;
+    private Request request;
+    private FireBase fireBase;
 
     private JavaNetworkController networkController = JavaNetworkController.getInstance();
     private NetworkController networkController2 = NetworkController.INSTANCE;
@@ -150,7 +154,7 @@ public class Utilities {
 
         motorRequests.add(motorRequest0);
 
-        final Request request = new Request("3", motorRequests, motorRequests.size());
+        final Request request = new Request("4", motorRequests, motorRequests.size());
 
         return  request;
     }
@@ -179,23 +183,22 @@ public class Utilities {
         motorRequests.add(motorRequest9);
         motorRequests.add(motorRequest10);
 
-        final Request request = new Request("1", motorRequests, motorRequests.size());
+        final Request request = new Request("3", motorRequests, motorRequests.size());
 
         return  request;
     }
 
     public void sendToRobot(String emotion){
-        Request request = null;
         switch (emotion){
 
             case "happy":
-                request = getHappy();
+                getRequestWithIndex("1");
                 break;
             case "sad":
-                request = getSad();
+                getRequestWithIndex("2");
                 break;
             case "waiting":
-                request = getWaiting();
+                getRequestWithIndex("3");
                 break;
 
         }
@@ -203,6 +206,16 @@ public class Utilities {
         String data = gson.toJson(request);
         //networkController.sendDataToIp("192.168.43.4",data,null);
         networkController2.sendDataToIp("192.168.1.52",data,null);
+    }
+
+    private void getRequestWithIndex(String i){
+        fireBase.getFaceRequest("req", i, new DataListener() {
+            @Override
+            public void onDataLoad(Object o) {
+                request = (Request) o;
+            }
+        });
+
     }
 
 

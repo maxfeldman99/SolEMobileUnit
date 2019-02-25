@@ -15,6 +15,9 @@ public class MotorRequest
         this.angle = angle;
         this.delayAmount = delayAmount;
     }
+    public MotorRequest(){
+
+    }
 
     public String getId() {
         return id;
@@ -54,5 +57,16 @@ public class MotorRequest
 
     public void setDelayAmount(String delayAmount) {
         this.delayAmount = delayAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "MotorRequest{" +
+                "id='" + id + '\'' +
+                ", port='" + port + '\'' +
+                ", speed='" + speed + '\'' +
+                ", angle='" + angle + '\'' +
+                ", delayAmount='" + delayAmount + '\'' +
+                '}';
     }
 }
