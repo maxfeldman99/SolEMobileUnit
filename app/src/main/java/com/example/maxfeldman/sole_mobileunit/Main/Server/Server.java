@@ -87,17 +87,20 @@ public class Server implements Runnable {
                 String test = "ack";
                 try {
                     if(message!=null){
-                        if(message.equals("max")){
+                        if(message.equals("max")) {
                             outputStream.writeObject(test);
+                        }
+                        if(message.startsWith("ack")){
+                            String answer = message.substring(3);
+                            outputStream.writeObject(answer);
+                        }
                         }else{
                             Log.e("wtf",message);
                             //support.firePropertyChange(serverMessage, "standby",message);
                             Utilities.getInstance().loopTest(false);
                             mainController.executeVideo(message);
                         }
-                    }else{
-                        Log.e("wtf","message is null");
-                    }
+
 
 
                     //controller.executeSequence(request.getSequence());

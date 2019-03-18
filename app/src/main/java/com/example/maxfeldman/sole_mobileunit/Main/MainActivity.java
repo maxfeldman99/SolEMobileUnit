@@ -19,6 +19,7 @@ import com.example.maxfeldman.sole_mobileunit.Main.Helpers.PojoConverter;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.ImageTestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.InputTestFragment;
+import com.example.maxfeldman.sole_mobileunit.Main.fragments.MenuFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.SessionFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.TestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
@@ -73,19 +74,21 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 
        // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
         final Fragment videoFragment = new VideoFragment();
+        final Fragment menuFragment  =  new MenuFragment();
         final Fragment sessionFragment = new SessionFragment();
         final Fragment testFragment = new TestFragment();
         final Fragment imageTestFragment = new ImageTestFragment();
         final Fragment inputTestFragment = new InputTestFragment();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,videoFragment).commit();
 
-        mainController.setVideoFragment((VideoFragment) videoFragment);
+        mainController.startServer();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, menuFragment).commit();
+
         //VideoFragment fragment = (VideoFragment) getSupportFragmentManager().findFragmentByTag("video");
         //fragment.OnVideoChanged("sad");
         //fragment.newInstance("happy");
 
-        mainController.startServer();
+
 
 
 //        fireBase.addFaceEmojiRequest(Utilities.getInstance().getHappy(),Utilities.getInstance().getHappy().getId());  // already was added
