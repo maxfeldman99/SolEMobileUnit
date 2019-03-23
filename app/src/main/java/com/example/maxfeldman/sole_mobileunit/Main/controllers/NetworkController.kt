@@ -1,6 +1,7 @@
 package com.example.maxfeldman.sole_mobileunit.Main.controllers
 
 import android.app.Application
+import com.example.maxfeldman.sole_mobileunit.Main.models.ValidateIpListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -62,13 +63,13 @@ object NetworkController
 
     }
 
-    fun validateIp(ip: String)
+    fun validateIp(ip: String,port: Int, listeners: ValidateIpListener)
     {
         GlobalScope.launch(Dispatchers.Default)
         {
             val id = UUID.randomUUID().toString()
             try {
-                val socket = Socket(ip, 1234)
+                val socket = Socket(ip, port)
                 val objectOutputStream = ObjectOutputStream(socket.getOutputStream())
 
                 objectOutputStream.writeObject("ack$id")
@@ -79,9 +80,9 @@ object NetworkController
                 GlobalScope.launch(Dispatchers.Main)
                 {
                     if (inputId == id) {
-                       // listeners.updateData("valid")
+                       listeners.onMessageReceived("valid")
                     } else {
-                        //listeners.updateData("invalid")
+                        listeners.onMessageReceived("invalid")
                     }
                 }
 

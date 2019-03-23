@@ -25,6 +25,7 @@ public class Utilities {
 
     private JavaNetworkController networkController = JavaNetworkController.getInstance();
     private NetworkController networkController2 = NetworkController.INSTANCE;
+    private Dao dao = Dao.getInstance();
 
 
     public static Utilities getInstance() {
@@ -192,13 +193,23 @@ public class Utilities {
         switch (emotion){
 
             case "happy":
-                getRequestWithIndex("1");
+                request=dao.getCachedSeq("1");
+                if(request==null){
+                    getRequestWithIndex("1");
+                }
+
                 break;
             case "sad":
-                getRequestWithIndex("2");
+                request=dao.getCachedSeq("2");
+                if(request==null){
+                    getRequestWithIndex("2");
+                }
                 break;
             case "waiting":
-                getRequestWithIndex("3");
+                request=dao.getCachedSeq("3");
+                if(request==null){
+                    getRequestWithIndex("3");
+                }
                 break;
 
         }
@@ -208,13 +219,23 @@ public class Utilities {
         networkController2.sendDataToIp("192.168.1.52",data,null);
     }
 
-    private void getRequestWithIndex(String i){
+    public void onAppStartup(){
+        for (int i = 0; i < 3; i++) {
+            Request request = getRequestWithIndex(String.valueOf(i+1));
+            dao.setCachedSeq(String.valueOf(i+1),request);
+        }
+
+    }
+
+    private Request getRequestWithIndex(String i){
         fireBase.getFaceRequest("req", i, new DataListener() {
             @Override
             public void onDataLoad(Object o) {
                 request = (Request) o;
             }
         });
+
+        return request;
 
     }
 

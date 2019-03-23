@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.maxfeldman.sole_mobileunit.Main.MainActivity;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
+import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.example.maxfeldman.sole_mobileunit.R;
 
 import java.util.regex.Matcher;
@@ -26,6 +27,7 @@ import java.util.regex.Pattern;
 public class MenuFragment extends Fragment {
 
     MainController mainController = MainController.getInstance();
+    Utilities utilities = Utilities.getInstance();
     boolean isValid = false;
 
     public MenuFragment() {
@@ -48,6 +50,7 @@ public class MenuFragment extends Fragment {
         Button buttonNext = view.findViewById(R.id.next_btn);
         final EditText ipEditText = view.findViewById(R.id.ip_et);
         final ImageView imageVal = view.findViewById(R.id.img_val);
+        utilities.onAppStartup();
 
 
 
