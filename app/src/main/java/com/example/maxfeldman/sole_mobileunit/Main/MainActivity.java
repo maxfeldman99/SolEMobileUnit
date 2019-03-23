@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
     private static String serverMessage = "standby";
     PojoConverter pojoConverter = new PojoConverter();
     MainController mainController = MainController.getInstance();
+    Utilities utilities = Utilities.getInstance();
     private boolean loopTest = true;
     private FireBase fireBase = new FireBase();
     Request request;
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
         setContentView(R.layout.activity_main);
 
 
+
         mainController.setMainActivity(this);
 
        // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 
 
         mainController.startServer();
+        utilities.onAppStartup();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, menuFragment).commit();
 
         //VideoFragment fragment = (VideoFragment) getSupportFragmentManager().findFragmentByTag("video");

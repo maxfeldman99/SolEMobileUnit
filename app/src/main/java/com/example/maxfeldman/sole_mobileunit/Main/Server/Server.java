@@ -86,15 +86,13 @@ public class Server implements Runnable {
                 String compMessage = null;
                 String test = "ack";
                 try {
-                    if(message!=null){
-                        if(message.equals("max")) {
-                            outputStream.writeObject(test);
-                        }
-                        if(message.startsWith("ack")){
+                    if(message!=null) {
+
+                        if (message.startsWith("ack")) {
                             String answer = message.substring(3);
                             outputStream.writeObject(answer);
                         }
-                        }else{
+                        else{
                             Log.e("wtf",message);
                             //support.firePropertyChange(serverMessage, "standby",message);
                             Utilities.getInstance().loopTest(false);
@@ -102,7 +100,7 @@ public class Server implements Runnable {
                         }
 
 
-
+                    }
                     //controller.executeSequence(request.getSequence());
 
                 } catch (Exception e) {

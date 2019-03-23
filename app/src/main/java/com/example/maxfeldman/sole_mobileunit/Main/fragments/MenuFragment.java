@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.maxfeldman.sole_mobileunit.Main.MainActivity;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
+import com.example.maxfeldman.sole_mobileunit.Main.models.ValidateIpListener;
 import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.example.maxfeldman.sole_mobileunit.R;
 
@@ -27,7 +29,7 @@ import java.util.regex.Pattern;
 public class MenuFragment extends Fragment {
 
     MainController mainController = MainController.getInstance();
-    Utilities utilities = Utilities.getInstance();
+    ImageView imageVal;
     boolean isValid = false;
 
     public MenuFragment() {
@@ -49,8 +51,14 @@ public class MenuFragment extends Fragment {
         Button button = view.findViewById(R.id.validateButton);
         Button buttonNext = view.findViewById(R.id.next_btn);
         final EditText ipEditText = view.findViewById(R.id.ip_et);
-        final ImageView imageVal = view.findViewById(R.id.img_val);
-        utilities.onAppStartup();
+        imageVal = view.findViewById(R.id.img_val);
+        String ip = mainController.getIp();
+
+        if(ip != null)
+        {
+            ipEditText.setText(ip);
+        }
+
 
 
 
@@ -58,7 +66,7 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String ip = ipEditText.getText().toString();
-                isValid = validateIP(ip);
+                validateIP(ip);
                 if(isValid == true){
                     imageVal.setImageResource(R.drawable.ic_done);
                     imageVal.setVisibility(View.VISIBLE);
@@ -85,7 +93,7 @@ public class MenuFragment extends Fragment {
     }
 
 
-    private boolean validateIP(String inputIP){
+    private void validateIP(final String inputIP){
         final Pattern IP_ADDRESS
                 = Pattern.compile(
                 "((25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\\.(25[0-5]|2[0-4]"
@@ -94,9 +102,30 @@ public class MenuFragment extends Fragment {
                         + "|[1-9][0-9]|[0-9]))");
         Matcher matcher = IP_ADDRESS.matcher(inputIP);
         if (matcher.matches()) {
-            return true;
+            NetworkController.INSTANCE.validateIp(inputIP, 12345, new ValidateIpListener() {
+                @Override
+                public void onMessageReceived(String message) {
+                    String result = (String) message;
+
+
+
+                    if(result.equals("valid"))
+                    {
+                        imageVal.setImageResource(R.drawable.ic_done);
+                        imageVal.setVisibility(View.VISIBLE);
+                        mainController.setIp(inputIP);
+
+                        isValid = true;
+
+                    }else {
+                        imageVal.setImageResource(R.drawable.ic_error);
+                        imageVal.setVisibility(View.VISIBLE);
+
+                        isValid = false;
+                    }
+                }
+            });
         }
-        return false;
     }
 
     private void goToFace(){
@@ -107,5 +136,7 @@ public class MenuFragment extends Fragment {
         fragmentManager.beginTransaction().replace(R.id.container,videoFragment,"VideoFragment").commitNow();
         mainController.setVideoFragment((VideoFragment) videoFragment);
     }
+
+
 
 }

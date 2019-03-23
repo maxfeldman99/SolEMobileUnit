@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import com.example.maxfeldman.sole_mobileunit.Main.Helpers.DataListener;
 import com.example.maxfeldman.sole_mobileunit.Main.Helpers.FireBase;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.JavaNetworkController;
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.models.MotorRequest;
 import com.example.maxfeldman.sole_mobileunit.Main.models.Request;
@@ -33,6 +34,7 @@ public class Utilities {
     }
 
     private Utilities() {
+        fireBase = new FireBase();
     }
 
     public void setLoop(boolean loop) {
@@ -193,22 +195,39 @@ public class Utilities {
         switch (emotion){
 
             case "happy":
-                request=dao.getCachedSeq("1");
+                dao.getCachedSeq("1", new DataListener() {
+                    @Override
+                    public void onDataLoad(Object o) {
+                        request = (Request) o;
+                    }
+                });
+//
                 if(request==null){
-                    getRequestWithIndex("1");
+                    getRequestWithIndex("1",null);
                 }
-
                 break;
             case "sad":
-                request=dao.getCachedSeq("2");
+                dao.getCachedSeq("2", new DataListener() {
+                    @Override
+                    public void onDataLoad(Object o) {
+                        request = (Request) o;
+                    }
+                });
+//
                 if(request==null){
-                    getRequestWithIndex("2");
+                    getRequestWithIndex("2",null);
                 }
                 break;
             case "waiting":
-                request=dao.getCachedSeq("3");
+                dao.getCachedSeq("3", new DataListener() {
+                    @Override
+                    public void onDataLoad(Object o) {
+                        request = (Request) o;
+                    }
+                });
+//
                 if(request==null){
-                    getRequestWithIndex("3");
+                    getRequestWithIndex("3",null);
                 }
                 break;
 
@@ -216,26 +235,38 @@ public class Utilities {
         Gson gson = new Gson();
         String data = gson.toJson(request);
         //networkController.sendDataToIp("192.168.43.4",data,null);
-        networkController2.sendDataToIp("192.168.1.52",data,null);
+        networkController2.sendDataToIp(MainController.getInstance().getIp(),data,null);
+
     }
 
     public void onAppStartup(){
         for (int i = 0; i < 3; i++) {
-            Request request = getRequestWithIndex(String.valueOf(i+1));
-            dao.setCachedSeq(String.valueOf(i+1),request);
+            final int finalI = i;
+            getRequestWithIndex(String.valueOf(i + 1), new DataListener() {
+                @Override
+                public void onDataLoad(Object o)
+                {
+                    Request tempReq = (Request) o;
+                    dao.setCachedSeq(String.valueOf(finalI +1),tempReq);
+
+                }
+            });
         }
 
     }
 
-    private Request getRequestWithIndex(String i){
+    private void getRequestWithIndex(String i, final DataListener listener){
         fireBase.getFaceRequest("req", i, new DataListener() {
             @Override
             public void onDataLoad(Object o) {
                 request = (Request) o;
+                if(listener != null)
+                {
+                    listener.onDataLoad(request);
+                }
             }
         });
 
-        return request;
 
     }
 

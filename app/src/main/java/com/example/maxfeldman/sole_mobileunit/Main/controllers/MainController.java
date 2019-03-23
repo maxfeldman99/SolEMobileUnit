@@ -17,6 +17,7 @@ public class MainController {
     private static Server serverController;
     private static VideoController videoController;
     private static MongoDB mongoDB;
+    public String ip = null;
     //private static NetworkController networkController;
     private static JavaNetworkController networkController;
     AppCompatActivity mainActivity;
@@ -45,6 +46,15 @@ public class MainController {
     public void setVideoFragment(VideoFragment fragment)
     {
         videoController.setVideoFragment(fragment,mainActivity);
+    }
+
+    public void setIp(String ip)
+    {
+        this.ip = ip;
+    }
+    public String getIp()
+    {
+        return this.ip;
     }
 
     public void executeVideo(String content){
