@@ -1,17 +1,15 @@
 package com.example.maxfeldman.sole_mobileunit.Main.controllers
 
-import android.app.Activity
 import android.app.Application
-import android.content.Context
-import android.speech.tts.TextToSpeech
-import com.mapzen.speakerbox.Speakerbox
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.IOException
+import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
-import java.io.OutputStream
 import java.net.Socket
 import java.util.*
+import com.max.michael.robotviewunit.models.*
 
 /*
        object = Singleton
@@ -62,7 +60,38 @@ object NetworkController
 //            speaker.play(sentence)
 //        }
 
+    }
 
+    fun validateIp(ip: String)
+    {
+        GlobalScope.launch(Dispatchers.Default)
+        {
+            val id = UUID.randomUUID().toString()
+            try {
+                val socket = Socket(ip, 1234)
+                val objectOutputStream = ObjectOutputStream(socket.getOutputStream())
+
+                objectOutputStream.writeObject("ack$id")
+                println("ack$id")
+                val objectInputStream = ObjectInputStream(socket.getInputStream())
+                val inputId = objectInputStream.readObject() as String
+
+                GlobalScope.launch(Dispatchers.Main)
+                {
+                    if (inputId == id) {
+                       // listeners.updateData("valid")
+                    } else {
+                        //listeners.updateData("invalid")
+                    }
+                }
+
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            }
+        }
 
     }
 
