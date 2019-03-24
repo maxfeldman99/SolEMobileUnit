@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
     MainController mainController = MainController.getInstance();
     Utilities utilities = Utilities.getInstance();
     private boolean loopTest = true;
-    private FireBase fireBase = new FireBase();
     Request request;
 
 
@@ -69,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
+        Utilities.getInstance().storeRequests();
 
 
 

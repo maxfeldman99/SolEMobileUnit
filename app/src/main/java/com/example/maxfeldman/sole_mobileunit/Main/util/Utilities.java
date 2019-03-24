@@ -108,7 +108,7 @@ public class Utilities {
         motorRequests.add(motorRequest9);
         motorRequests.add(motorRequest10);
 
-        final Request request = new Request("1", motorRequests, motorRequests.size());
+        final Request request = new Request("happy", motorRequests, motorRequests.size());
 
         return  request;
     }
@@ -131,7 +131,7 @@ public class Utilities {
 //        motorRequests.add(motorRequest5);
 //        motorRequests.add(motorRequest6);
 
-        final Request request = new Request("2", motorRequests, motorRequests.size());
+        final Request request = new Request("sad", motorRequests, motorRequests.size());
 
         return  request;
     }
@@ -186,10 +186,12 @@ public class Utilities {
         motorRequests.add(motorRequest9);
         motorRequests.add(motorRequest10);
 
-        final Request request = new Request("3", motorRequests, motorRequests.size());
+        final Request request = new Request("funny", motorRequests, motorRequests.size());
 
         return  request;
     }
+
+
 
     public void sendToRobot(String emotion){
         switch (emotion){
@@ -240,35 +242,49 @@ public class Utilities {
     }
 
     public void onAppStartup(){
-        for (int i = 0; i < 3; i++) {
-            final int finalI = i;
-            getRequestWithIndex(String.valueOf(i + 1), new DataListener() {
-                @Override
-                public void onDataLoad(Object o)
-                {
-                    Request tempReq = (Request) o;
-                    dao.setCachedSeq(String.valueOf(finalI +1),tempReq);
-
-                }
-            });
-        }
+//        for (int i = 0; i < 3; i++) {
+//            final int finalI = i;
+//            getRequestWithIndex(String.valueOf(i + 1), new DataListener() {
+//                @Override
+//                public void onDataLoad(Object o)
+//                {
+//                    Request tempReq = (Request) o;
+//                    dao.setCachedSeq(String.valueOf(finalI +1),tempReq);
+//
+//                }
+//            });
+//        }
 
     }
 
     private void getRequestWithIndex(String i, final DataListener listener){
-        fireBase.getFaceRequest("req", i, new DataListener() {
-            @Override
-            public void onDataLoad(Object o) {
-                request = (Request) o;
-                if(listener != null)
-                {
-                    listener.onDataLoad(request);
-                }
-            }
-        });
+//        fireBase.getFaceRequest("sole_jr_robot_requests", i, new DataListener() {
+//            @Override
+//            public void onDataLoad(Object o) {
+//                request = (Request) o;
+//                if(listener != null)
+//                {
+//                    listener.onDataLoad(request);
+//                }
+//            }
+//        });
 
 
     }
+
+    public void storeRequests(){
+        Request request1 = getHappy();
+        Request request2 = getSad();
+        Request request3 = getFunny();
+
+        fireBase.addFaceEmojiRequest(request1,"happy");
+        fireBase.addFaceEmojiRequest(request2,"sad");
+        fireBase.addFaceEmojiRequest(request3,"funny");
+
+    }
+
+
+
 
 
 
