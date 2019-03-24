@@ -2,6 +2,7 @@ package com.example.maxfeldman.sole_mobileunit.Main.Helpers;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.maxfeldman.sole_mobileunit.Main.models.Request;
 import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
@@ -9,9 +10,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by MAX FELDMAN on 23/02/2019.
@@ -20,14 +27,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class FireBase {
 
 
-    public static FirebaseFirestore db=FirebaseFirestore.getInstance();
+    public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Request req2;
 
 
-
-
-
-    public void addFaceEmojiRequest(Request request,String id){
+    public void addFaceEmojiRequest(Request request, String id) {
 
 
         db.collection("sole_jr_robot_requests").document(id)
@@ -46,22 +50,36 @@ public class FireBase {
                 });
     }
 
-    public void getFaceRequest(String collection, String id,final DataListener listener){
+    public void getFaceRequest(String collection, final String id, final DataListener listener) {
 
-        DocumentReference docRef = db.collection(collection).document(id);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        CollectionReference docRef = db.collection(collection);
+        docRef.whereEqualTo("id", id).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Request request = documentSnapshot.toObject(Request.class);
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots.isEmpty()) {
 
-                listener.onDataLoad(request);
+                } else {
+                    List<Request> requests = queryDocumentSnapshots.toObjects(Request.class);
+                    for (int i = 0; i < requests.size(); i++) {
+                        Request request = requests.get(i);
+                        if (request.getId().equals(id)) {
+                            listener.onDataLoad(request);
+                        }
+                    }
+
+                }
+
+
             }
+
         });
-
-
     }
 
+    public void getAllRequests(String collection,final DataListener listener){
+        CollectionReference docRef = db.collection(collection);
 
-
-
+    }
 }
+
+
+

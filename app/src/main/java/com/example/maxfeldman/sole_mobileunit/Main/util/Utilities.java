@@ -194,80 +194,91 @@ public class Utilities {
 
 
     public void sendToRobot(String emotion){
-        switch (emotion){
 
-            case "happy":
-                dao.getCachedSeq("1", new DataListener() {
-                    @Override
-                    public void onDataLoad(Object o) {
-                        request = (Request) o;
-                    }
-                });
-//
-                if(request==null){
-                    getRequestWithIndex("1",null);
-                }
-                break;
-            case "sad":
-                dao.getCachedSeq("2", new DataListener() {
-                    @Override
-                    public void onDataLoad(Object o) {
-                        request = (Request) o;
-                    }
-                });
-//
-                if(request==null){
-                    getRequestWithIndex("2",null);
-                }
-                break;
-            case "waiting":
-                dao.getCachedSeq("3", new DataListener() {
-                    @Override
-                    public void onDataLoad(Object o) {
-                        request = (Request) o;
-                    }
-                });
-//
-                if(request==null){
-                    getRequestWithIndex("3",null);
-                }
-                break;
 
-        }
+            dao.getCachedSeq(emotion, new DataListener() {
+                @Override
+                public void onDataLoad(Object o) {
+                    request = (Request) o;
+                }
+            });
+
+//            case "happy":
+//                dao.getCachedSeq("1", new DataListener() {
+//                    @Override
+//                    public void onDataLoad(Object o) {
+//                        request = (Request) o;
+//                    }
+//                });
+////
+//                if(request==null){
+//                    getRequestWithIndex("1",null);
+//                }
+//                break;
+//            case "sad":
+//                dao.getCachedSeq("2", new DataListener() {
+//                    @Override
+//                    public void onDataLoad(Object o) {
+//                        request = (Request) o;
+//                    }
+//                });
+////
+//                if(request==null){
+//                    getRequestWithIndex("2",null);
+//                }
+//                break;
+//            case "waiting":
+//                dao.getCachedSeq("3", new DataListener() {
+//                    @Override
+//                    public void onDataLoad(Object o) {
+//                        request = (Request) o;
+//                    }
+//                });
+////
+//                if(request==null){
+//                    getRequestWithIndex("3",null);
+//                }
+//                break;
+
         Gson gson = new Gson();
         String data = gson.toJson(request);
         //networkController.sendDataToIp("192.168.43.4",data,null);
         networkController2.sendDataToIp(MainController.getInstance().getIp(),data,null);
 
+
     }
+
+
+
 
     public void onAppStartup(){
-//        for (int i = 0; i < 3; i++) {
-//            final int finalI = i;
-//            getRequestWithIndex(String.valueOf(i + 1), new DataListener() {
-//                @Override
-//                public void onDataLoad(Object o)
-//                {
-//                    Request tempReq = (Request) o;
-//                    dao.setCachedSeq(String.valueOf(finalI +1),tempReq);
-//
-//                }
-//            });
-//        }
+        for (int i = 0; i < 3; i++) {
+            final int finalI = i;
+
+            getRequestWithId(String.valueOf(i + 1), new DataListener() {
+                @Override
+                public void onDataLoad(Object o)
+                {
+                    Request tempReq = (Request) o;
+                    dao.setCachedSeq(String.valueOf(finalI +1),tempReq);
+
+                }
+            });
+        }
 
     }
 
-    private void getRequestWithIndex(String i, final DataListener listener){
-//        fireBase.getFaceRequest("sole_jr_robot_requests", i, new DataListener() {
-//            @Override
-//            public void onDataLoad(Object o) {
-//                request = (Request) o;
-//                if(listener != null)
-//                {
-//                    listener.onDataLoad(request);
-//                }
-//            }
-//        });
+    private void getRequestWithId(String id, final DataListener listener){
+        fireBase.getFaceRequest("sole_jr_robot_requests", id, new DataListener() {
+            @Override
+            public void onDataLoad(Object o) {
+                request = (Request) o;
+                if(listener != null)
+                {
+                    listener.onDataLoad(request);
+                }
+            }
+        });
 
 
     }
