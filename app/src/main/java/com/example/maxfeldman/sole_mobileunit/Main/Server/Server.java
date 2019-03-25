@@ -73,7 +73,12 @@ public class Server implements Runnable {
                 {
                     serverSocket = new ServerSocket(PORT);
                 }
+
                 socket  = serverSocket.accept();
+
+                mainController.senderIp = socket.getLocalAddress().toString();
+                //mainController.senderPort = socket.getLocalPort();
+
                 Log.d("test","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 inputStream = new ObjectInputStream(socket.getInputStream());
                 outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -92,6 +97,8 @@ public class Server implements Runnable {
                             String answer = message.substring(3);
                             outputStream.writeObject(answer);
                         }
+
+
                         else{
                             Log.e("wtf",message);
                             //support.firePropertyChange(serverMessage, "standby",message);

@@ -15,6 +15,8 @@ import android.widget.VideoView;
 
 
 import com.example.maxfeldman.sole_mobileunit.Main.MainActivity;
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.VideoController;
 import com.example.maxfeldman.sole_mobileunit.Main.models.OnDataChangedListener;
 import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
@@ -53,6 +55,8 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     final Fragment testFragment = new TestFragment();
 
     public VideoController videoController;
+    public NetworkController networkController;
+    public MainController mainController;
 
 
 
@@ -152,7 +156,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 //                 while(videoLoop == true) {
 //                     executeVideo(temp, 0);
 //                 }
-
+                 networkController.sendDataToIp(mainController.senderIp,"finVideo",null);
                      getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, videoFragment).commit();
 
              }

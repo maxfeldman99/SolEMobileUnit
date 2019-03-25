@@ -21,6 +21,8 @@ public class MainController {
     //private static NetworkController networkController;
     private static JavaNetworkController networkController;
     AppCompatActivity mainActivity;
+    public String senderIp;
+    public int senderPort;
 
 
     public MainController() {
