@@ -8,6 +8,8 @@ import com.example.maxfeldman.sole_mobileunit.Main.Server.Server;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
 import com.example.maxfeldman.sole_mobileunit.R;
 
+import java.net.Socket;
+
 /**
  * Created by MAX FELDMAN on 07/01/2019.
  */
@@ -23,6 +25,7 @@ public class MainController {
     AppCompatActivity mainActivity;
     public String senderIp;
     public int senderPort;
+    public Socket socket;
 
 
     public MainController() {

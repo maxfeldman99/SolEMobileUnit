@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.maxfeldman.sole_mobileunit.Main.models.Request;
+import com.example.maxfeldman.sole_mobileunit.Main.util.Dao;
 import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -18,6 +19,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -77,6 +79,23 @@ public class FireBase {
 
     public void getAllRequests(String collection,final DataListener listener){
         CollectionReference docRef = db.collection(collection);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+              if(queryDocumentSnapshots.isEmpty()){
+
+              }else{
+                  List<Request> requests = queryDocumentSnapshots.toObjects(Request.class);
+                  HashMap<String,Request> map  = Dao.getInstance().getHashMap();
+
+                  for (int i = 0; i <requests.size() ; i++) {
+                      map.put(requests.get(i).getId(),requests.get(i));
+                  }
+              }
+            }
+        });
+
+
 
     }
 }

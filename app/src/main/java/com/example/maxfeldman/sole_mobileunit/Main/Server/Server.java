@@ -8,6 +8,7 @@ import com.example.maxfeldman.sole_mobileunit.Main.models.ContentRequest;
 import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.google.gson.Gson;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class Server implements Runnable {
     private ServerSocket serverSocket;
     private Socket socket;
     private String serverMessage = "standby";
-   // private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+    private String serverStatus = "off";
     MainController mainController;
 
 
@@ -45,13 +46,7 @@ public class Server implements Runnable {
         gson = new Gson();
     }
 
-//    public void addPropertyChangeListener(PropertyChangeListener pcl) {
-//        support.addPropertyChangeListener(pcl);
-//    }
-//
-//    public void removePropertyChangeListener(PropertyChangeListener pcl) {
-//        support.removePropertyChangeListener(pcl);
-//    }
+
 
 
     @Override
@@ -76,8 +71,13 @@ public class Server implements Runnable {
 
                 socket  = serverSocket.accept();
 
-                mainController.senderIp = socket.getLocalAddress().toString();
+
+
+
+                mainController.socket = socket;
                 //mainController.senderPort = socket.getLocalPort();
+
+
 
                 Log.d("test","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 inputStream = new ObjectInputStream(socket.getInputStream());
@@ -101,13 +101,23 @@ public class Server implements Runnable {
 
                         else{
                             Log.e("wtf",message);
-                            //support.firePropertyChange(serverMessage, "standby",message);
                             Utilities.getInstance().loopTest(false);
+                            mainController.socket = socket;
+
                             mainController.executeVideo(message);
+                            //outputStream.writeObject("finVideo");
+
+
                         }
 
 
+
                     }
+
+
+
+
+
                     //controller.executeSequence(request.getSequence());
 
                 } catch (Exception e) {

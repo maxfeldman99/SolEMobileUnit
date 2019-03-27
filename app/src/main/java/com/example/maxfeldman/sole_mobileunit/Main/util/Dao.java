@@ -37,8 +37,8 @@ public class Dao {
 
     }
 
-    public void setCachedSeq(String id,Request request){
-        cacheSeq.put(id,request);
+    public HashMap getHashMap(){
+        return cacheSeq;
     }
 
 

@@ -17,6 +17,7 @@ import com.example.maxfeldman.sole_mobileunit.Main.Helpers.DataListener;
 import com.example.maxfeldman.sole_mobileunit.Main.Helpers.FireBase;
 import com.example.maxfeldman.sole_mobileunit.Main.Helpers.PojoConverter;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
+import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.ImageTestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.InputTestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.MenuFragment;
@@ -167,5 +168,9 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Utilities.getInstance().sendToRobot("exit");
+    }
 }

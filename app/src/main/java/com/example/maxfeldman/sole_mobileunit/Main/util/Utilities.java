@@ -200,6 +200,12 @@ public class Utilities {
                 @Override
                 public void onDataLoad(Object o) {
                     request = (Request) o;
+
+                    Gson gson = new Gson();
+                    String data = gson.toJson(request);
+                    //networkController.sendDataToIp("192.168.43.4",data,null);
+                    networkController2.sendDataToIp(MainController.getInstance().getIp(),data,null);
+
                 }
             });
 
@@ -240,10 +246,6 @@ public class Utilities {
 //                }
 //                break;
 
-        Gson gson = new Gson();
-        String data = gson.toJson(request);
-        //networkController.sendDataToIp("192.168.43.4",data,null);
-        networkController2.sendDataToIp(MainController.getInstance().getIp(),data,null);
 
 
     }
@@ -252,19 +254,7 @@ public class Utilities {
 
 
     public void onAppStartup(){
-        for (int i = 0; i < 3; i++) {
-            final int finalI = i;
-
-            getRequestWithId(String.valueOf(i + 1), new DataListener() {
-                @Override
-                public void onDataLoad(Object o)
-                {
-                    Request tempReq = (Request) o;
-                    dao.setCachedSeq(String.valueOf(finalI +1),tempReq);
-
-                }
-            });
-        }
+        fireBase.getAllRequests("sole_jr_robot_requests",null);
 
     }
 

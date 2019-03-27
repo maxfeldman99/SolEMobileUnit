@@ -22,6 +22,11 @@ import com.example.maxfeldman.sole_mobileunit.Main.models.OnDataChangedListener;
 import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.example.maxfeldman.sole_mobileunit.R;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 
 public class VideoFragment extends Fragment implements OnDataChangedListener {
@@ -45,6 +50,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     private static Uri uri = null;
     private static boolean videoLoop = true;
 
+
     private static final String ARG_TEXT = "argText";
     private String currentVideo;
 
@@ -57,6 +63,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
     public VideoController videoController;
     public NetworkController networkController;
     public MainController mainController;
+
 
 
 
@@ -78,6 +85,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
         super.onResume();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); // to lock the landscape mode
     }
+
 
 
 
@@ -156,8 +164,10 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 //                 while(videoLoop == true) {
 //                     executeVideo(temp, 0);
 //                 }
-                 networkController.sendDataToIp(mainController.senderIp,"finVideo",null);
-                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, videoFragment).commit();
+
+                 mainController = MainController.getInstance();
+                 sendVideoFinishedMsg();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, videoFragment).commit();
 
              }
          });
@@ -211,4 +221,27 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
         }
     }
+
+    private void sendVideoFinishedMsg(){
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Socket socket = MainController.getInstance().socket;
+                try {
+                    Socket socket1 = new Socket(socket.getInetAddress(),1234);
+
+
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket1.getOutputStream());
+                    objectOutputStream.writeObject("finVideo");
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        t.start();
+    }
+
+
 }

@@ -30,7 +30,7 @@ public class MenuFragment extends Fragment {
 
     MainController mainController = MainController.getInstance();
     ImageView imageVal;
-    boolean isValid = false;
+    boolean isValid = true;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -58,6 +58,8 @@ public class MenuFragment extends Fragment {
         {
             ipEditText.setText(ip);
         }
+
+
 
 
 

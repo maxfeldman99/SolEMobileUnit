@@ -49,6 +49,18 @@ object NetworkController
 
     }
 
+    fun sendDataWithSocket(socket: Socket,data: Any)
+    {
+
+        GlobalScope.launch (Dispatchers.Default){
+
+            val outputStream = ObjectOutputStream(socket.getOutputStream())
+
+            outputStream.writeObject(data)
+
+        }
+    }
+
     fun sayTTS(sentence: String, application: Application)
     {
 
