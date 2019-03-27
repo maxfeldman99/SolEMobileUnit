@@ -3,14 +3,9 @@ package com.example.maxfeldman.sole_mobileunit.Main.Server;
 import android.util.Log;
 
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
-import com.example.maxfeldman.sole_mobileunit.Main.models.Answer;
-import com.example.maxfeldman.sole_mobileunit.Main.models.ContentRequest;
 import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.google.gson.Gson;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

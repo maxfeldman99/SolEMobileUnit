@@ -1,12 +1,9 @@
 package com.example.maxfeldman.sole_mobileunit.Main.controllers;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.maxfeldman.sole_mobileunit.Main.Helpers.MongoDB;
 import com.example.maxfeldman.sole_mobileunit.Main.Server.Server;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
-import com.example.maxfeldman.sole_mobileunit.R;
 
 import java.net.Socket;
 
@@ -18,7 +15,6 @@ public class MainController {
 
     private static Server serverController;
     private static VideoController videoController;
-    private static MongoDB mongoDB;
     public String ip = null;
     //private static NetworkController networkController;
     private static JavaNetworkController networkController;

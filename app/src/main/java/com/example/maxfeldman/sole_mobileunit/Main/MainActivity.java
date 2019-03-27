@@ -5,48 +5,24 @@ package com.example.maxfeldman.sole_mobileunit.Main;
 import android.net.Uri;
 
 
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 
-import com.example.maxfeldman.sole_mobileunit.Main.Helpers.DataListener;
-import com.example.maxfeldman.sole_mobileunit.Main.Helpers.FireBase;
-import com.example.maxfeldman.sole_mobileunit.Main.Helpers.PojoConverter;
 import com.example.maxfeldman.sole_mobileunit.Main.controllers.MainController;
-import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController;
-import com.example.maxfeldman.sole_mobileunit.Main.fragments.ImageTestFragment;
-import com.example.maxfeldman.sole_mobileunit.Main.fragments.InputTestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.MenuFragment;
-import com.example.maxfeldman.sole_mobileunit.Main.fragments.SessionFragment;
-import com.example.maxfeldman.sole_mobileunit.Main.fragments.TestFragment;
 import com.example.maxfeldman.sole_mobileunit.Main.fragments.VideoFragment;
-import com.example.maxfeldman.sole_mobileunit.Main.models.MotorRequest;
 import com.example.maxfeldman.sole_mobileunit.Main.models.Request;
 import com.example.maxfeldman.sole_mobileunit.Main.util.Utilities;
 import com.example.maxfeldman.sole_mobileunit.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 
 import org.bson.Document;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements VideoFragment.OnFragmentInteractionListener,PropertyChangeListener{
@@ -78,10 +54,7 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
        // VideoFragment videoFragment = VideoFragment.newInstance("waiting");
         final Fragment videoFragment = new VideoFragment();
         final Fragment menuFragment  =  new MenuFragment();
-        final Fragment sessionFragment = new SessionFragment();
-        final Fragment testFragment = new TestFragment();
-        final Fragment imageTestFragment = new ImageTestFragment();
-        final Fragment inputTestFragment = new InputTestFragment();
+
 
 
         mainController.startServer();
@@ -168,9 +141,4 @@ public class MainActivity extends AppCompatActivity implements VideoFragment.OnF
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Utilities.getInstance().sendToRobot("exit");
-    }
 }
