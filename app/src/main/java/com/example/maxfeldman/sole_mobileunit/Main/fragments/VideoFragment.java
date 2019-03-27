@@ -53,15 +53,7 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
     private static final String ARG_TEXT = "argText";
     private String currentVideo;
-
-
-    private OnFragmentInteractionListener mListener;
-    private OnDataChangedListener listener;
-    final Fragment sessionFragment = new SessionFragment();
-    final Fragment testFragment = new TestFragment();
-
     public VideoController videoController;
-    public NetworkController networkController;
     public MainController mainController;
 
 
