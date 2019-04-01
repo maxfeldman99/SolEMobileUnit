@@ -37,8 +37,8 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
 
     private VideoView videoView;
     private static int wrongTime = 0;
-    private final String HAPPY = "happy";
-    private final String SAD = "sad";
+    private final String HAPPY = "Smile";
+    private final String SAD = "sadFace";
     private final String FINISH = " finish";
     private final String TEST = "test";
     private final String MY_URI = "android.resource://com.example.maxfeldman.sole_mobileunit/raw/";

@@ -251,8 +251,6 @@ public class Utilities {
     }
 
 
-
-
     public void onAppStartup(){
         fireBase.getAllRequests("sole_jr_robot_requests",null);
 
@@ -283,11 +281,6 @@ public class Utilities {
         fireBase.addFaceEmojiRequest(request3,"funny");
 
     }
-
-
-
-
-
 
 }
 

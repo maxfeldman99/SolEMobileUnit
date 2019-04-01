@@ -30,7 +30,7 @@ public class MenuFragment extends Fragment {
 
     MainController mainController = MainController.getInstance();
     ImageView imageVal;
-    boolean isValid = true;
+    boolean isValid = false;
 
     public MenuFragment() {
         // Required empty public constructor
