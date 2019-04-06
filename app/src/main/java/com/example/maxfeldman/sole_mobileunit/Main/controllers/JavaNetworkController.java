@@ -1,9 +1,5 @@
 package com.example.maxfeldman.sole_mobileunit.Main.controllers;
 
-import android.app.Application;
-
-import com.mapzen.speakerbox.Speakerbox;
-
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -17,7 +13,6 @@ public class JavaNetworkController <T> {
 
     private JavaNetworkController() {
     }
-
     public void sendDataToIp(final String ip, final T data, final String type)
     {
         Thread netWorkThread = new Thread(new Runnable() {
@@ -40,6 +35,5 @@ public class JavaNetworkController <T> {
             }
         });
     }
-
 
 }

@@ -199,10 +199,6 @@ public class VideoFragment extends Fragment implements OnDataChangedListener {
                 uri = Uri.parse(pathName);
                 executeVideo(uri,SECOND*3);
                 break;
-            case FINISH:
-                uri = Uri.parse(MY_URI + R.raw.youwin);
-                executeVideo(uri,SECOND*3);
-                break;
             case WAITING:
                 pathName = MY_URI + WAITING ;
                 uri = Uri.parse(pathName);

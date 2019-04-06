@@ -11,7 +11,6 @@ import com.example.maxfeldman.sole_mobileunit.Main.controllers.NetworkController
 import com.example.maxfeldman.sole_mobileunit.Main.models.MotorRequest;
 import com.example.maxfeldman.sole_mobileunit.Main.models.Request;
 import com.google.gson.Gson;
-import com.mapzen.speakerbox.Speakerbox;
 
 import java.util.ArrayList;
 
@@ -49,20 +48,6 @@ public class Utilities {
         return this.mp;
     }
 
-    public void sayTTS(final String sentence, final Application application) {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Speakerbox speakerbox = new Speakerbox(application);
-                speakerbox.play(sentence);
-
-
-            }
-        });
-
-        thread.start();
-
-    }
 
     public void loopTest(boolean loop) {
         setLoop(loop);
@@ -70,9 +55,6 @@ public class Utilities {
         mp.setLooping(loop);
 
     }
-
-
-
 
 
 
