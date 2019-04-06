@@ -60,9 +60,6 @@ public class MainController {
 
     public void executeVideo(String content){
 
-        //VideoController videoController = VideoController.getInstance();
-        //VideoFragment videoFragment = VideoFragment.newInstance(content);
-        //videoController.setVideoFragment(videoFragment,mainActivity);
         videoController.setVideoContent(content);
     }
 

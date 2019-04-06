@@ -25,8 +25,6 @@ public class Server implements Runnable {
     private ObjectOutputStream outputStream = null;
     private ServerSocket serverSocket;
     private Socket socket;
-    private String serverMessage = "standby";
-    private String serverStatus = "off";
     MainController mainController;
 
 
@@ -48,11 +46,7 @@ public class Server implements Runnable {
     public void run()
     {
 
-       // serverSocket= new ServerSocket(PORT);
-       // socket  = serverSocket.accept();
 
-        //inputStream = new ObjectInputStream(socket.getInputStream());
-        //outputStream = new ObjectOutputStream(socket.getOutputStream());
 
 
         while(SERVER_IS_RUNNING)
